@@ -2462,6 +2462,11 @@ and flow </div>
     <div class="task-btn" data-task="VQA">Visual Question Answering (VQA)</div>
   </div>
 
+  <div class="body-text interactive-hint-bar">
+  The <span style="color: #003399; font-weight: 800;">dark blue</span> and <span style="color: #3572ef; font-weight: 700;">medium blue</span> 
+  values represent the <strong>best</strong> and <strong>second-best</strong> performance, respectively. 
+  <!-- Higher values indicate better results across all metrics. -->
+    </div>
 
 </div>
 <!-- Leaderboard 样式（与你现有风格一致） -->
@@ -3570,6 +3575,50 @@ and flow </div>
 let selectedDomain = "IAA"; 
 let selectedTask = "VR";
 
+/**
+ * 核心修复：遍历页面上所有 leaderboard-table
+ * 使得所有表格（包括隐藏的）都能完成数值高亮计算
+ */
+function highlightAllTables() {
+  // 选取所有排行榜表格
+  const tables = document.querySelectorAll(".leaderboard-table");
+  
+  tables.forEach(table => {
+    const rows = Array.from(table.querySelectorAll("tbody tr"));
+    if (rows.length === 0) return;
+
+    // 获取列数（基于第一行数据行）
+    const colCount = rows[0].children.length;
+
+    // 从第 2 列开始遍历（索引 1），跳过第一列模型名称
+    for (let col = 1; col < colCount; col++) {
+      let values = [];
+
+      rows.forEach(row => {
+        let cell = row.children[col];
+        if (!cell) return;
+        
+        // 提取数值：parseFloat 会自动处理 "0.746/0.738" 或 "89.74%" 并取第一个有效数字
+        let text = cell.innerText.trim();
+        let val = parseFloat(text);
+
+        if (!isNaN(val)) {
+          // 清除可能存在的旧类名，确保计算准确
+          cell.classList.remove("top1", "top2");
+          values.push({ cell, val });
+        }
+      });
+
+      // 根据数值降序排列
+      values.sort((a, b) => b.val - a.val);
+
+      // 标注该列的前两名（会自动关联你 CSS 中的蓝色加粗样式）
+      if (values.length > 0) values[0].cell.classList.add("top1");
+      if (values.length > 1) values[1].cell.classList.add("top2");
+    }
+  });
+}
+
 function updateTable() {
   // 隐藏所有表格内容
   document.querySelectorAll(".table-content").forEach(div => div.style.display = "none");
@@ -3591,7 +3640,10 @@ function initializeDefaultSelection() {
   const defaultTaskBtn = document.querySelector(`.task-btn[data-task="${selectedTask}"]`);
   if (defaultTaskBtn) defaultTaskBtn.classList.add("active");
 
-  // 初始显示表格
+  // --- 关键修改：在初始化时计算页面所有表格的高亮，不论当前是否可见 ---
+  highlightAllTables();
+  
+  // 初始显示默认表格
   updateTable();
 }
 
