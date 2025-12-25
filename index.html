@@ -1,0 +1,4744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UniPercept Project</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* Make the About section follow the same width as other sections */
+.about-wrapper {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+/* 让整个页面的每个内容模块保持居中、避免过宽展开 */
+.section {
+  max-width: 1400px;      /* 页面主体内容宽度（可调成 1100 / 1300 等） */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;     /* 适当内边距，避免太贴边 */
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+
+  color: rgba(255, 255, 255, 0.95);   /* 亮白 */
+
+  text-shadow: 0 0 12px rgba(255,255,255,0.75); /* 柔光效果 */
+
+  animation: scrollPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%   { opacity: 0.55; transform: translateX(-50%) translateY(0); }
+  50%  { opacity: 1;    transform: translateX(-50%) translateY(6px); }
+  100% { opacity: 0.55; transform: translateX(-50%) translateY(0); }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+.page {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  background: #f4f6fc;  /* 或你的正文背景色 */
+}
+
+
+
+/* 主标题 */
+.hero-title {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 54px;
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: 15px;
+
+  /* 高亮版三主题色渐变 */
+  background: linear-gradient(
+    90deg,
+    #ff3f6a 0%,     /* 更亮的红：Aesthetics */
+    #4d9dff 40%,    /* 更亮的蓝：Quality */
+    #b46dff 100%    /* 更鲜艳的紫：Structure & Texture */
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 副标题 */
+.hero-subtitle {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.45;
+  max-width: 900px;
+}
+
+/* 渐变颜色片段 */
+.grad-red {
+  background: linear-gradient(120deg, #ff4d6d, #ff8fa3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.grad-blue {
+  background: linear-gradient(120deg, #4d8bff, #6fa9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.grad-purple {
+  background: linear-gradient(120deg, #b35dff, #d7a5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* ============================================================
+   GLOBAL THEME
+============================================================ */
+:root {
+  --bg: #f4f6fc;
+  --text-main: #182027;
+  --text-soft: #5f6c7b;
+  --card-bg: #ffffff;
+
+  --red: #ff4d6d;
+  --blue: #4d8bff;
+  --purple: #b35dff;
+
+  --radius: 16px;
+  --shadow: 0 8px 22px rgba(0,0,0,0.08);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: "Georgia", "Times New Roman", serif;
+  color: var(--text-main);
+}
+
+/* ============================================================
+   HERO SECTION
+============================================================ */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  padding: 100px 8%;
+  height: 95vh;
+  background: linear-gradient(135deg, 
+      rgba(255,77,109,0.35), 
+      rgba(77,139,255,0.28), 
+      rgba(179,93,255,0.30)
+  );
+  background-size: 200% 200%;
+  animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-left {
+  width: 50%;
+  padding-right: 40px;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.25;
+}
+
+.hero-title span.red { color: var(--red); }
+.hero-title span.blue { color: var(--blue); }
+.hero-title span.purple { color: var(--purple); }
+
+.hero-desc {
+  font-size: 18px;
+  color: var(--text-soft);
+  max-width: 520px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.hero-bullets {
+  margin-top: 26px;
+}
+
+.bullet {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+  font-size: 16px;
+  align-items: center;
+}
+
+.bullet-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #ffffff70;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+/* HERO BUTTONS */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.08);
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.hero-btn-icon {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+/* HERO RIGHT CAROUSEL */
+/* HERO RIGHT CAROUSEL */
+/* HERO RIGHT CAROUSEL — fully clean container */
+.hero-right {
+  width: 48%;
+  height: 75vh;
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  /* 移除所有视觉效果 */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+
+  /* 保留布局，居中内容 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel-placeholder {
+  color: #eee;
+  font-size: 22px;
+  font-style: italic;
+}
+
+/* ============================================================
+   PAGE LAYOUT
+============================================================ */
+.page {
+  display: flex;
+  padding: 40px 8%;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  position: sticky;
+  top: 40px;
+  height: fit-content;
+}
+
+.sidebar a {
+  display: block;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: white;
+  border: 1px solid #e1e3e8;
+  box-shadow: var(--shadow);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.sidebar a:hover {
+  background: #eef3ff;
+  transform: translateX(4px);
+}
+
+/* MAIN CONTENT */
+.main {
+  flex: 1;
+  margin-left: 40px;
+}
+
+.section {
+  margin-bottom: 90px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.placeholder {
+  height: 140px;
+  background: #e7e9f2;
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-style: italic;
+}
+
+/* BUTTON GROUP (like second example image) */
+.jump-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.jump-btn {
+  width: 200px;
+  padding: 20px;
+  text-align: center;
+  background: #eaf1ff;
+  border: 2px solid #b9d1ff;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: var(--shadow);
+}
+
+.jump-btn:hover {
+  background: #dce8ff;
+  transform: translateY(-3px);
+}
+
+/* ============================================
+   RESPONSIVE FIX FOR HERO SECTION
+============================================ */
+@media (max-width: 1200px) {
+
+  .hero {
+    flex-direction: column;      /* 左右 → 上下 */
+    height: auto;                /* 取消 95vh 的强制高度 */
+    padding: 60px 6% 80px;       /* 缩小上边距 */
+  }
+
+  .hero-left,
+  .hero-right {
+    width: 100%;                 /* 宽度自动拉满 */
+    padding-right: 0;
+  }
+
+  .hero-title {
+    font-size: 34px;
+    line-height: 1.25;
+  }
+
+  .hero-subtitle {
+    font-size: 20px;
+    max-width: 100%;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+  }
+
+  .author-line span,
+  .affiliation-line span {
+    font-size: 12px;
+    line-height: 1.15;
+  }
+}
+
+
+/* ============================================
+   Mobile adjustments (≤ 768px)
+============================================ */
+@media (max-width: 768px) {
+
+  .hero {
+    padding: 40px 5% 60px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 17px;
+  }
+
+  .hero-bullets .bullet {
+    font-size: 14px;
+  }
+
+  /* 隐藏 scroll indicator，因为它会盖住内容 */
+  .scroll-indicator {
+    display: none;
+  }
+
+  /* 作者名字换行更窄 */
+  .author-line {
+    gap: 12px 18px;
+  }
+
+  .affiliation-line {
+    gap: 8px 16px;
+  }
+}
+
+
+/* ============================================
+   Very small screens (≤ 480px)
+============================================ */
+@media (max-width: 480px) {
+
+  .hero-title {
+    font-size: 24px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+  }
+
+  .author-line span,
+  .affiliation-line span {
+    font-size: 11px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="snap-container">
+
+  <section class="snap-section" id="hero">
+    <div class="hero-content">
+
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
+<div class="hero">
+
+  <div class="more-research-wrapper">
+    <button class="hero-btn research-main-btn" id="research-btn">
+      <span class="hero-btn-icon">📁</span> More Research <span class="toggle-arrow">▾</span>
+    </button>
+    
+    <div class="research-content-box" id="research-box">
+      <div class="research-links-inner">
+        <a class="text-link-item" href="https://thunderbolt215.github.io/ArtiMuse-project/" target="_blank">
+          <span class="link-icon">🎨</span> ArtiMuse
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-top-section">
+    <div class="hero-title">UniPercept</div>
+    <div class="hero-subtitle">
+      Towards Unified Perceptual-Level Image Understanding across <br>
+      <span class="grad-red">Aesthetics</span>, 
+      <span class="grad-blue">Quality</span>, 
+      <span class="grad-purple">Structure and Texture</span>
+    </div>
+
+  <div class="contribution-block">
+  <!-- <div class="contribution-item">
+    <div class="contribution-icon">📚</div>
+    <div class="contribution-text">
+      <span class="contribution-title">Unified Definition.</span>
+      Establish a unified perceptual-level image understanding definition system covering
+      Aesthetics (IAA), Quality (IQA), Structure & Texture (ISTA).
+    </div>
+  </div> -->
+
+  <div class="contribution-item">
+    <div class="contribution-icon">🏛️</div>
+    <div class="contribution-text">
+      <span class="contribution-title">UniPercept-Bench.</span>
+     <!-- Introduce a perceptual-level MLLM benchmark that spans the IAA, IQA, and ISTA domains and supports both VR and VQA perceptual tasks. -->
+      For the first time, we propose a comprehensive perceptual-level definition system and introduce an MLLM benchmark that spans the IAA, IQA, and ISTA domains while supporting both VR and VQA perceptual tasks.
+    </div>
+  </div>
+
+  <div class="contribution-item">
+    <div class="contribution-icon">🧠</div>
+    <div class="contribution-text">
+      <span class="contribution-title">Strong Baseline: UniPercept.</span>
+      Develop a strong baseline MLLM trained via Domain-Adaptive Pre-Training and Task-Aligned RL for perceptual-level image understanding.
+    </div>
+  </div>
+
+  <div class="contribution-item">
+    <div class="contribution-icon">🔧</div>
+    <div class="contribution-text">
+      <span class="contribution-title">Downstream Applications.</span>
+      Enable plug-and-play reward modeling for text-to-image generation and provide unified perceptual metrics for evaluation.
+    </div>
+  </div>
+
+  <div class="contribution-item">
+    <div class="contribution-icon">🖼️</div>
+    <div class="contribution-text">
+      <span class="contribution-title">Building Unified Profiles for Every Image.</span>
+      UniPercept constructs a comprehensive profile for each image, spanning the IAA, IQA, and ISTA domains and providing fine-grained, multi-dimensional analytical outputs.
+    </div>
+  </div>
+</div>
+</div>
+
+    <div class="hero-buttons">
+      <a class="hero-btn" href="#"><span class="hero-btn-icon">📄</span> Arxiv</a>
+      <a class="hero-btn" href="#"><span class="hero-btn-icon">💻</span> Code</a>
+      <a class="hero-btn" href="#"><span class="hero-btn-icon">🤗</span> UniPercept</a>
+      <a class="hero-btn" href="#"><span class="hero-btn-icon">📊</span> UniPercept-Bench</a>
+  </div>
+
+  <div class="collage-expand-wrapper" id="collage-wrapper">
+    <div class="collage-masonry" id="collage-container">
+      </div>
+    <div class="collage-overlay" id="collage-overlay"></div>
+  </div>
+  
+  <button class="expand-toggle-btn" id="expand-btn">Expand to View More</button>
+</div>
+
+<style>
+/* --- ArtiMuse 文本链接风格优化 --- */
+.text-link-item {
+  text-decoration: none !important; /* 强制去除蓝色下划线 */
+  color: #ffffff !important;        /* 强制设为纯白色 */
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+  opacity: 0.85; /* 初始状态微调，增加层次感 */
+}
+
+.text-link-item:hover {
+  color: #ffffff !important;
+  opacity: 1; /* 悬浮时完全亮起 */
+  transform: translateY(-1px);
+}
+
+.link-icon { 
+  font-size: 16px; 
+}
+
+/* --- More Research 展开容器微调 --- */
+.research-content-box {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.research-content-box.is-active {
+  max-height: 60px;
+  margin-top: 10px; /* 适当增加间距 */
+}
+
+/* --- Contribution Block 空间压缩 --- */
+  .contribution-block {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .contribution-item {
+    display: flex;
+    align-items: flex-start; 
+    text-align: left;
+    margin-bottom: 8px; 
+  }
+
+  .contribution-icon {
+    width: 38px; 
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08); /* 圆形底色 */
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    margin-right: 12px; 
+    flex-shrink: 0;
+  }
+
+  .contribution-title { color: #fff; font-weight: 700; margin-right: 6px; }
+  .contribution-text { font-size: 14px; color: rgba(255, 255, 255, 0.85); line-height: 1.35; flex: 1; }
+  /* 正文 Text */
+  .body-text {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85); /* 修改为黑色，保留 0.85 的透明度以增加质感 */
+    line-height: 1.35;
+    flex: 1;
+  }
+  /* --- More Research 交互按钮 --- */
+  .more-research-wrapper { margin-bottom: 8px; text-align: center; z-index: 1000; position: relative; }
+  .research-main-btn {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    padding: 4px 16px !important; 
+  }
+
+  .research-content-box { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+  .research-content-box.is-active { max-height: 60px; margin-top: 6px; }
+
+  /* --- 页面整体布局：深色学术风格 --- */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto; 
+    padding: 20px 20px 50px;
+    box-sizing: border-box;
+    background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+    color: #f1f5f9;
+    overflow-x: hidden;
+  }
+
+  .hero-top-section { width: 100%; max-width: 900px; text-align: center; margin-bottom: 10px; }
+  .hero-title { font-size: 40px; font-weight: 900; margin-bottom: 2px; color: #fff; }
+  .hero-subtitle { font-size: 17px; margin-bottom: 12px; color: rgba(255,255,255,0.7); }
+
+  .hero-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
+  .hero-btn {
+    padding: 6px 16px; 
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+  }
+
+  /* --- 拼接展示区域 --- */
+  .collage-expand-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    max-height: 440px; 
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 15px;
+  }
+  
+  .collage-expand-wrapper.expanded { max-height: 5000px; }
+  .collage-masonry { column-count: 5; column-gap: 12px; padding: 5px 10px; }
+
+  /* --- 核心修改：鼠标悬浮放大效果 --- */
+  .collage-item {
+    break-inside: avoid;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05); /* 玻璃拟态背景 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    
+    /* 动画准备 */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .collage-item:hover {
+    /* 放大 1.08 倍并上移，translateZ 保持硬件加速消除抖动 */
+    transform: scale(1.08) translateY(-5px) translateZ(0); 
+    z-index: 100; /* 确保悬浮块位于最上层 */
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .collage-image-box img { width: 100%; height: auto; display: block; }
+
+  .collage-text {
+    padding: 8px 10px;
+    font-size: 10px;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .collage-overlay {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; 
+    background: linear-gradient(to bottom, transparent, #0f172a);
+    pointer-events: none; transition: opacity 0.5s;
+  }
+  .expanded .collage-overlay { opacity: 0; }
+
+  .expand-toggle-btn {
+    margin-top: 15px; padding: 6px 25px; background: #fff; color: #0f172a; border: none;
+    border-radius: 999px; font-weight: 700; font-size: 13px; cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s;
+  }
+
+  /* 霓虹色调 */
+  .grad-red { color: #f472b6; text-shadow: 0 0 10px rgba(244,114,182,0.2); }
+  .grad-blue { color: #60a5fa; text-shadow: 0 0 10px rgba(96,165,250,0.2); }
+  .grad-purple { color: #a78bfa; text-shadow: 0 0 10px rgba(167,139,250,0.2); }
+</style>
+
+<script>
+  (function () {
+    const rowData = {
+      IAA: [
+        { img: "figures/teaser/iaa_1.png", text: "Q: What structural element guides the viewer's eye? <br> A: Diagonal shoreline line." },
+        { img: "figures/teaser/iaa_2.png", text: "Q: Does the glow enhance atmosphere? <br> A: Yes." },
+        { img: "figures/teaser/iaa_3.png", text: "Q: Which element conveys cultural insight? <br> A: Samurai armor." },
+        // { img: "figures/teaser/iaa_4.png", text: "T2I model w/ UniPercept IAA reward exhibits marked improvements in aesthetic quality." },
+        { img: "figures/teaser/reward_iaa_1.png", text: "T2I model w/ UniPercept IAA reward exhibits marked improvements in aesthetic quality." },
+        { img: "figures/teaser/iaa_add_1.png", text: "Q: What compositional decision most impacts the sense of grandeur in the image?  <br> A: Emphasizing vertical layers." },
+        { img: "figures/teaser/iaa_add_2.png", text: "Q: What is your assessment of the Comprehensive Evaluation quality in this picture?  <br> A: High." }
+      ],
+      IQA: [
+        { img: "figures/teaser/iqa_1.png", text: "Q: What spatial region shows motion blur?<br> A: Basketball in mid-air." },
+        { img: "figures/teaser/iqa_2.png", text: "Q: To what degree are distortions present?<br> A: Obvious." },
+        { img: "figures/teaser/iqa_3.png", text: "Q: How does pixelation affect texture?<br> A: Blocky appearance." },
+        // { img: "figures/teaser/iqa_4.png", text: "T2I model w/ UniPercept IQA reward exhibits marked improvements in quality." },
+        { img: "figures/teaser/reward_iqa_1.png", text: "T2I model w/ UniPercept IQA reward exhibits marked improvements in quality." },
+        { img: "figures/teaser/iqa_add_1.png", text: "Q: What distortion type is most evident in this image's color representation? <br> A: Saturation Weaken HSV." },
+        { img: "figures/teaser/iqa_add_2.png", text: "Q: How does the spatial clarity differ between the wooden floor and the cat's fur? <br> A: Floor grain is sharper than fur texture." }
+      ],
+      ISTA: [
+        { img: "figures/teaser/ista_1.png", text: "Q: How can the fabric pattern be classified?<br> A: Grid of squares." },
+        { img: "figures/teaser/ista_2.png", text: "Q: Primary material of spray paint cans?<br> A: Metal." },
+        { img: "figures/teaser/ista_3.png", text: "Q: Surface texture implication?<br> A: Sea, smooth, gradient teal." },
+        { img: "figures/teaser/reward_ista_1.png", text: "T2I model w/ UniPercept ISTA reward richness." },
+        { img: "figures/teaser/reward_ista_2.png", text: "T2I model w/ UniPercept ISTA reward richness." },
+        { img: "figures/teaser/ista_add_1.png", text: "Q: What is the primary 2D contour shape visible in the honeycomb structure?  <br> A: Hexagon." },
+        { img: "figures/teaser/ista_add_2.png", text: "Q: What term best describes the surface texture of the sandy scene?  <br> A: Pitted." },
+        { img: "figures/teaser/reward_all_1.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." },
+        { img: "figures/teaser/reward_all_2.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." },
+        { img: "figures/teaser/reward_all_3.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." }
+      ]
+    };
+
+    const container = document.getElementById("collage-container");
+    const wrapper = document.getElementById("collage-wrapper");
+    const btn = document.getElementById("expand-btn");
+    const resBtn = document.getElementById("research-btn");
+    const resBox = document.getElementById("research-box");
+
+    resBtn.addEventListener('click', () => resBox.classList.toggle('is-active'));
+
+    let allItems = [];
+    Object.keys(rowData).forEach(task => {
+      rowData[task].forEach(item => allItems.push(item));
+    });
+    allItems.sort(() => 0.5 - Math.random());
+
+    container.innerHTML = allItems.map(item => `
+      <div class="collage-item">
+        <div class="collage-image-box">
+          <img src="${item.img}" alt="" loading="lazy">
+        </div>
+        <div class="collage-text">${item.text}</div>
+      </div>
+    `).join('');
+
+    btn.addEventListener('click', () => {
+      wrapper.classList.toggle('expanded');
+      btn.textContent = wrapper.classList.contains('expanded') ? "Collapse Content" : "Expand to View All";
+      if (!wrapper.classList.contains('expanded')) {
+        window.scrollTo({ top: wrapper.offsetTop - 50, behavior: 'smooth' });
+      }
+    });
+  })();
+</script>
+
+<section class="snap-section" id="main-content">
+<!-- ============================================================
+     MAIN PAGE
+============================================================ -->
+<div class="page">
+
+
+    <style>
+    /* ===========================
+            TOC STYLES
+    =========================== */
+    .toc {
+    width: 240px;
+    position: sticky;
+    top: 50px;
+    padding: 20px 0;
+    font-size: 15px;
+    }
+
+    .toc-title {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.6px;
+    margin-bottom: 18px;
+    color: #222;
+    }
+
+    /* Main items */
+    .toc-item,
+    .toc-sub {
+    display: block;
+    text-decoration: none;
+    padding: 7px 0;
+    color: #333;
+    transition: 0.2s ease;
+    border-left: 3px solid transparent;
+    margin-left: 4px;
+    }
+
+    .toc-item:hover,
+    .toc-sub:hover {
+    color: #0056ff;
+    }
+
+    /* Sub items */
+    .toc-sub {
+    font-size: 14px;
+    color: #666;
+    margin-left: 20px;
+    }
+
+    /* Active highlight */
+    .toc-item.active,
+    .toc-sub.active {
+    color: #0056ff;
+    font-weight: 600;
+    border-left: 3px solid #0056ff;
+    }
+    </style>
+
+    <script>
+    /* ===========================
+    TOC AUTO-HIGHLIGHT LOGIC
+    =========================== */
+
+    const tocLinks = document.querySelectorAll(".toc-item, .toc-sub");
+
+    /* Map TOC ids to section IDs */
+    const sectionMap = {
+    about: "#about",
+
+    bench: "#bench",
+    "bench-vis": "#bench-vis",
+    "bench-leaderboard": "#bench-leaderboard",
+
+    reward: "#reward",
+    "reward-vis": "#reward-vis",
+    "reward-perf": "#reward-perf",
+
+    metrics: "#metrics",
+    results: "#results",
+    contact: "#contact",
+    };
+
+    /* Collect all actual section elements */
+    const sections = Object.values(sectionMap)
+    .map((id) => document.querySelector(id))
+    .filter(Boolean);
+
+    /* Scroll spy observer */
+    const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            const id = entry.target.id;
+
+            tocLinks.forEach((link) => link.classList.remove("active"));
+
+            const activeLink = document.querySelector(`a[href="#${id}"]`);
+            if (activeLink) activeLink.classList.add("active");
+        }
+        });
+    },
+    { threshold: 0.35 }
+    );
+
+    /* Activate observer for each section */
+    sections.forEach((sec) => observer.observe(sec));
+    </script>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- ABOUT -->
+    <!-- ============================
+     ABOUT UNIPERCEPT SECTION
+============================= -->
+
+<style>
+/* Two-column flexible layout */
+.about-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+/* Left text area */
+.about-text {
+  flex: 1.2;
+  min-width: 300px;
+  font-family: "Georgia", "Times New Roman", serif;
+  line-height: 1.6;
+  font-size: 17px;
+}
+
+/* Right PDF preview */
+.about-pdf {
+  flex: 0.9;
+  display: flex;
+  justify-content: center;
+}
+
+.pdf-preview {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+}
+
+/* Responsive for small screens */
+@media (max-width: 900px) {
+  .about-wrapper {
+    flex-direction: column;
+  }
+  .about-pdf {
+    margin-top: 20px;
+  }
+}
+</style>
+
+
+<div class="author-block-wrapper" style="
+  text-align: center; 
+  line-height: 1.6; 
+  margin: 25px auto; 
+  padding: 15px 0; 
+  border-top: 1px solid #ddd; 
+  border-bottom: 1px solid #ddd; 
+  font-family: 'Times New Roman', Times, serif; 
+  color: #333;
+">
+
+  <div class="author-line" style="
+    font-weight: bold; 
+    font-size: 1.05em; 
+    margin-bottom: 8px; 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 8px 18px;
+  ">
+    <span>Shuo Cao*</span>
+    <span>Jiayang Li*</span>
+    <span>Xiaohui Li</span>
+    <span>Yuandong Pu</span>
+    <span>Kaiwen Zhu</span>
+    <span>Yuanting Gao</span>
+    <span>Siqi Luo</span>
+    <span>Yi Xin</span>
+    <span>Qi Qin</span>
+    <span>Yu Zhou</span>
+    <span>Xiangyu Chen</span>
+    <span>Wenlong Zhang</span>
+    <span>Bin Fu</span>
+    <span>Yu Qiao</span>
+    <span>Yihao Liu&dagger;</span>
+  </div>
+
+  <div class="affiliation-line" style="
+    margin-bottom: 8px; 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 5px 30px; 
+    font-size: 0.98em; 
+    color: #555;
+  ">
+    <span>University of Science and Technology of China</span>
+    <span>Shanghai AI Laboratory</span>
+    <span>Peking University</span>
+  </div>
+
+  <div class="equal-note" style="
+    font-size: 0.9em; 
+    font-style: italic; 
+    color: #666;
+  ">
+    * Equal contribution&emsp;&emsp;&dagger; Corresponding author
+  </div>
+
+</div>
+
+<div class="about-wrapper">
+
+  <!-- LEFT: TEXT -->
+  <div class="about-text">
+    <div class="section-title">Perceptual-Level Image Understanding</div>
+
+    <p>
+      <i>Perceptual-level image understanding</i> focuses on how an image 
+      <i>looks and feels</i>—capturing aesthetics, quality degradations,
+      structural regularity, and surface texture. These fine-grained perceptual
+      cues differ fundamentally from semantic recognition, yet remain
+      underexplored in MLLMs. 
+      
+      <br>To address this,
+      we introduce <b>UniPercept</b>, a unified framework that defines,
+      evaluates, and improves perceptual-level visual understanding across the
+      IAA, IQA, and ISTA domains.
+    </p>
+
+    <ul style="margin-top: 10px; line-height: 1.6;">
+      <!-- <li>
+        <b>Unified perceptual taxonomy.</b> A hierarchical definition system
+        across aesthetics, quality, and structure & texture.
+      </li> -->
+      <!-- <li>
+        <b>UniPercept-Bench.</b> A large-scale benchmark covering VR and VQA 
+        tasks across IAA, IQA, and ISTA domains.
+      </li>
+      <li>
+        <b>UniPercept model.</b> A strong perceptual-level MLLM trained via 
+        Domain-Adaptive Pre-Training and Task-Aligned RL.
+      </li> -->
+      <!-- <li>
+        <b>Consistent improvements.</b> Outperforms existing models across all 
+        perceptual dimensions.
+      </li> -->
+      <!-- <li>
+        <b>Downstream applications.</b> Serves as a plug-and-play reward model
+        and unified perceptual metric for generative image evaluation.
+      </li> -->
+    </ul>
+  </div>
+
+  <!-- RIGHT: PDF IMAGE -->
+  <div class="about-pdf">
+    <img src="figures/mission_compare_v3-1.png" alt="PDF Preview" class="pdf-preview">
+  </div>
+
+</div>
+
+    <!-- BENCH -->
+    <div id="bench" class="section">
+      <div class="section-title">UniPercept-Bench</div>
+
+    
+      <!-- ======================== -->
+<!--  Interactive Viewer 标题  -->
+<!-- ======================== -->
+<style>
+/* ====== Interactive Viewer 标题（论文风格加强版）====== */
+.interactive-viewer-title {
+  display: inline-block;
+  margin: 24px auto 10px auto;
+  padding: 10px 38px;
+
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+
+  color: #ffffff;
+  background: rgba(20, 20, 20, 0.82);        /* 更高级的深黑半透明 */
+  border-radius: 48px;
+
+  /* 更精致的描边 + 光晕 */
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: 
+      inset 0 1px 3px rgba(255,255,255,0.15),  /* 内部微高光 */
+      0 4px 14px rgba(0,0,0,0.15);              /* 外扩阴影（更稳重） */
+
+  backdrop-filter: blur(6px);                  /* 微毛玻璃，保持学术感 */
+  -webkit-backdrop-filter: blur(6px);
+
+  /* 水平垂直居中 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+  text-align: center;
+
+  /* 学术风格：静态，不提供交互暗示 */
+  cursor: default;
+}
+</style>
+<!-- 标题 -->
+<div class="interactive-viewer-title">
+  Interactive Statistics Viewer
+</div>
+
+<style>
+  /* --- 您提供的基础样式 (保持不变) --- */
+  .body-text {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 1.35;
+    flex: 1;
+  }
+
+  /* --- 新增辅助样式：用于提示条的布局和图标 --- */
+  .interactive-hint-bar {
+    /* 继承 body-text 的基础字体样式，并增加弹性布局对齐 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* 允许在小屏幕自动换行 */
+    gap: 6px 15px; /* 行间距6px，列间距15px */
+    
+    /* 可选：添加一个极淡的背景色以区分提示区域，不需要可删除 */
+    background-color: rgba(0,0,0,0.03);
+    padding: 10px;
+    border-radius: 6px;
+    margin: 20px auto; /* 居中显示 */
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .hint-segment {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap; /* 防止单词内断行 */
+  }
+
+  .hint-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    color: rgba(0, 0, 0, 0.65); /* 图标颜色稍微淡一点，突出文字 */
+    fill: currentColor;
+  }
+  
+  /* 强调动作词汇 */
+  .hint-action {
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="body-text interactive-hint-bar">
+  
+  <span class="hint-segment">
+    <svg class="hint-icon" viewBox="0 0 24 24">
+      <path d="M13,1.07V8.5H19.6C20.92,8.5 22,9.58 22,10.9V20.55C22,21.2 21.74,21.79 21.32,22.23C20.84,22.7 20.2,23 19.5,23H5.9C5.15,23 4.47,22.67 4,22.15L3.9,22.05L9.37,10.2C9.68,9.55 10.37,9.09 11.17,9.09C11.37,9.09 11.57,9.12 11.75,9.19L13,9.7V1.07C13,0.47 12.53,0 11.93,0C11.33,0 10.87,0.47 10.87,1.07V6.93L6.89,6.11C6.55,6.04 6.18,6.12 5.89,6.34C5.6,6.57 5.44,6.92 5.47,7.28L5.78,11L2.2,19.06C2.06,19.38 2,19.73 2,20.1C2,21.7 3.3,23 4.9,23H19.5C20.86,23 21.97,21.9 22,20.55V10.9C22,9.9 21.4,9.05 20.53,8.67L13,5.35V1.07C13,1.07 13,1.07 13,1.07Z" />
+    </svg>
+    <span><span class="hint-action">Hover</span> to view quantities.</span>
+  </span>
+
+  <span class="hint-segment">
+    <svg class="hint-icon" viewBox="0 0 24 24">
+      <path d="M9,11.24V7.5C9,6.12 10.12,5 11.5,5C12.88,5 14,6.12 14,7.5V11.24C15.53,11.6 16.83,12.53 17.6,13.8C18.38,15.07 18.54,16.64 18.04,18.06L16.24,23H5.76L3.96,18.06C3.46,16.64 3.62,15.07 4.4,13.8C5.17,12.53 6.47,11.6 8,11.24V11.24V11.24Z" />
+    </svg>
+    <span><span class="hint-action">Click regions</span> for details.</span>
+  </span>
+
+  <span class="hint-segment">
+    <svg class="hint-icon" viewBox="0 0 24 24">
+      <path d="M12,2C17.52,2 22,6.48 22,12C22,17.52 17.52,22 12,22C6.48,22 2,17.52 2,12C2,6.48 6.48,2 12,2M12,4C7.58,4 4,7.58 4,12C4,16.42 7.58,20 12,20C16.42,20 20,16.42 20,12C20,7.58 16.42,4 12,4M12,10C13.1,10 14,10.9 14,12C14,13.1 13.1,14 12,14C10.9,14 10,13.1 10,12C10,10.9 10.9,10 12,10Z" />
+    </svg>
+    <span> <span class="hint-action">Click center</span> to return.</span>
+  </span>
+
+</div>
+
+<div id="sunburst-wrapper">
+  <svg id="sunburst-svg"></svg>
+  <div id="sunburst-tooltip"></div>
+</div>
+
+<style>
+#sunburst-wrapper {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* 必须为 relative 以便 tooltip 绝对定位 */
+}
+
+#sunburst-svg {
+  width: 720px;
+  height: 720px;
+  max-width: 100%;
+  border-radius: 18px;
+  display: block;
+}
+
+#sunburst-tooltip {
+  position: absolute;
+  background: rgba(0,0,0,0.85);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  pointer-events: none; /* 防止遮挡鼠标导致闪烁 */
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  font-family: "Inter", -apple-system, sans-serif;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  white-space: nowrap;
+}
+</style>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<script>
+const sunburstData = {
+  "name": "",
+  "children": [
+    {
+      "name": "IAA",
+      "children": [
+        {
+          "name": "Composition & Design",
+          "children": [
+            {"name": "Composition & Design Level", "value": 45},
+            {"name": "Compositional Rhythm", "value": 33},
+            {"name": "Harmonic Unity", "value": 27},
+            {"name": "Hierarchical Emphasis", "value": 33},
+            {"name": "Structural Organization", "value": 29},
+            {"name": "Visual Balance", "value": 28}
+          ]
+        },
+        {
+          "name": "Comprehensive Evaluation",
+          "children": [
+            {"name": "Comprehensive Evaluation Level", "value": 43}
+          ]
+        },
+        {
+          "name": "Emotion & Viewer Response",
+          "children": [
+            {"name": "Emotion & Viewer Response Level", "value": 43},
+            {"name": "Emotional Resonance", "value": 32},
+            {"name": "Viewer Engagement", "value": 30}
+          ]
+        },
+        {
+          "name": "Originality & Creativity",
+          "children": [
+            {"name": "Concept Innovation", "value": 35},
+            {"name": "Creative Problem-Solving", "value": 29},
+            {"name": "Originality Creativity Level", "value": 44}
+          ]
+        },
+        {
+          "name": "Overall Gestalt",
+          "children": [
+            {"name": "Holistic Cohesion", "value": 33},
+            {"name": "Overall Gestalt Level", "value": 44}
+          ]
+        },
+        {
+          "name": "Technical Execution",
+          "children": [
+            {"name": "Focus Control", "value": 31},
+            {"name": "Material Proficiency", "value": 31},
+            {"name": "Rendering Precision", "value": 31},
+            {"name": "Technical Execution Level", "value": 45},
+            {"name": "Tonal and Exposure Control", "value": 27}
+          ]
+        },
+        {
+          "name": "Theme & Communication",
+          "children": [
+            {"name": "Cultural Insight", "value": 25},
+            {"name": "Narrative Depth", "value": 33},
+            {"name": "Subject Clarity", "value": 34},
+            {"name": "Theme & Communication Level", "value": 43}
+          ]
+        },
+        {
+          "name": "Visual Elements & Structure",
+          "children": [
+            {"name": "Form Realization", "value": 27},
+            {"name": "Light Modeling", "value": 31},
+            {"name": "Line Dynamics", "value": 28},
+            {"name": "Shape Clarity", "value": 28},
+            {"name": "Spatial Illusion", "value": 30},
+            {"name": "Visual Elements & Structure Level", "value": 43}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "IQA",
+      "children": [
+        {
+          "name": "Distortion Location",
+          "children": [
+            {"name": "Location Description", "value": 268},
+            {"name": "Object Association", "value": 277}
+          ]
+        },
+        {
+          "name": "Distortion Severity",
+          "children": [
+            {"name": "Severity Level", "value": 299}
+          ]
+        },
+        {
+          "name": "Distortion Type",
+          "children": [
+            {"name": "Distortion Types Present", "value": 244}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ISTA",
+      "children": [
+        {
+          "name": "Geometric Composition",
+          "children": [
+            {"name": "2D Contour", "value": 98},
+            {"name": "3D Volume", "value": 136}
+          ]
+        },
+        {
+          "name": "Material Representation",
+          "children": [
+            {"name": "Material Identification", "value": 104},
+            {"name": "Surface Behavior", "value": 78}
+          ]
+        },
+        {
+          "name": "Physical Structure",
+          "children": [
+            {"name": "Base Morphology", "value": 89},
+            {"name": "Spatial Arrangement", "value": 190}
+          ]
+        },
+        {
+          "name": "Scene Decomposition Principles",
+          "children": [
+            {"name": "Scene Classification", "value": 33}
+          ]
+        },
+        {
+          "name": "Semantic Perception",
+          "children": [
+            {"name": "Functional Suggestion", "value": 88},
+            {"name": "Stylistic Classification", "value": 154}
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+(function drawSunburst() {
+  const svg = d3.select("#sunburst-svg");
+  svg.selectAll("*").remove();
+
+  const tooltip = d3.select("#sunburst-tooltip");
+  const width  = 720;
+  const height = 720;
+  const radius = width / 2;
+
+  svg.attr("viewBox", `${-width/2} ${-height/2} ${width} ${height}`);
+
+  const root = d3.partition()
+    .size([2 * Math.PI, 3])
+    (d3.hierarchy(sunburstData).sum(d => d.value || 0));
+
+  root.each(d => d.current = d);
+  let currentNode = root;
+
+  const domainColor = {
+    "IAA": d3.rgb("#ff6b8a"),
+    "IQA": d3.rgb("#4d95ff"),
+    "ISTA": d3.rgb("#b06bff")
+  };
+
+  function nodeColor(d) {
+    let p = d;
+    while (p.depth > 1) p = p.parent;
+    const base = domainColor[p.data.name];
+    if (!base) return "white";
+    const k = (d.depth - 1) * 0.25;
+    return d3.rgb(
+      base.r + (255 - base.r) * k,
+      base.g + (255 - base.g) * k,
+      base.b + (255 - base.b) * k
+    );
+  }
+
+  const ringWidth = radius / 3;
+
+  const arc = d3.arc()
+    .startAngle(d => d.x0)
+    .endAngle(d => d.x1)
+    .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
+    .padRadius(radius / 2)
+    .innerRadius(d => d.y0 * ringWidth)
+    .outerRadius(d => d.y1 * ringWidth - 1);
+
+  const g = svg.append("g");
+
+  const path = g.append("g")
+    .selectAll("path")
+    .data(root.descendants())
+    .join("path")
+      .attr("fill", d => nodeColor(d))
+      .attr("d", d => arc(d.current))
+      .style("stroke", "white")
+      .style("stroke-width", "0.5px")
+      .style("cursor", "pointer")
+      .on("click", clicked)
+      // --- 悬浮显示功能逻辑 ---
+      .on("mousemove", (event, d) => {
+        tooltip.style("left", (event.offsetX + 15) + "px")
+               .style("top", (event.offsetY + 15) + "px")
+               .style("opacity", 1)
+               .html(`<b>${d.data.name}</b><br>Count: ${d.value || 0}`);
+      })
+      .on("mouseout", () => tooltip.style("opacity", 0));
+      // ----------------------
+
+  const label = g.append("g")
+    .attr("pointer-events", "none")
+    .selectAll("text")
+    .data(root.descendants())
+    .join("text")
+      .attr("fill", "#000")
+      .attr("dy", "0.35em")
+      .attr("text-anchor", "middle")
+      .attr("font-size", d => d.depth === 1 ? "24px" : "10px")
+      .attr("fill-opacity", d => +labelVisible(d.current, d))
+      .attr("transform", d => labelTransform(d.current))
+      .each(function(d) { wrapLabel(this, d.data.name, ringWidth, d.depth); });
+
+  function clicked(event, p) {
+    if (currentNode === p && p.parent) p = p.parent;
+    currentNode = p;
+
+    root.each(d => d.target = {
+      x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+      x1: Math.max(0, Math.min(1, (d.x1 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+      y0: Math.max(0, d.y0 - p.y0),
+      y1: Math.max(0, d.y1 - p.y0)
+    });
+
+    const t = g.transition().duration(750);
+
+    path.transition(t)
+      .tween("data", d => {
+        const i = d3.interpolate(d.current, d.target);
+        return t => d.current = i(t);
+      })
+      .attrTween("d", d => () => arc(d.current));
+
+    label.transition(t)
+      .attr("fill-opacity", d => +labelVisible(d.target, d))
+      .attrTween("transform", d => () => labelTransform(d.current));
+  }
+
+  function labelVisible(d, fullData) {
+    const isTopLevel = fullData.depth === 1;
+    const isCurrentlyCenter = d.y0 === 0 && d.y1 <= 1;
+    if (isTopLevel && isCurrentlyCenter && currentNode !== root) return false;
+    return d.y1 <= 3 && d.y0 >= 0 && (d.x1 - d.x0) > 0.08;
+  }
+
+  function labelTransform(d) {
+    const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+    const y = ((d.y0 + d.y1) / 2) * ringWidth;
+    return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
+  }
+
+  function wrapLabel(node, text, ringWidth, depth) {
+    const maxWidth = ringWidth * (depth === 1 ? 0.8 : 0.65);
+    const group = d3.select(node);
+    group.text("");
+
+    const words = text.split(/\s+|&/);
+    let line = [];
+    const lines = [];
+
+    words.forEach(w => {
+      const test = [...line, w].join(" ");
+      if (test.length * 5.8 < maxWidth) {
+        line.push(w);
+      } else {
+        if (line.length) lines.push(line.join(" "));
+        line = [w];
+      }
+    });
+    if (line.length) lines.push(line.join(" "));
+
+    const finalLines = (depth >= 3) ? lines.slice(0, 2) : lines;
+
+    group.selectAll("tspan")
+      .data(finalLines)
+      .join("tspan")
+        .attr("x", 0)
+        .attr("dy", (d, i) => i === 0 ? "0.35em" : "1.1em")
+        .text(d => d);
+  }
+})();
+</script>
+
+<div class="interactive-viewer-title">
+  Benchmark Examples
+</div>
+<!-- ========================= -->
+<!-- Benchmark Examples Cards  -->
+<!-- ========================= -->
+
+<style>
+.examples-wrapper {
+  width: 100%;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  font-family: "Inter", sans-serif;
+}
+
+/* 每一行 */
+.examples-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* ------- CARD ------- */
+.example-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.example-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+/* 图片 */
+.example-img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 12px;
+
+  /* 为保持美观，给 contain 图像增加柔背景 */
+  background: rgba(255,255,255,0.15);
+  padding: 6px;
+}
+
+/* 文本部分 */
+.example-text {
+  font-size: 13px;
+  color: #e8e8e8;
+  line-height: 1.45;
+}
+
+/* 标签胶囊体 */
+.example-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+}
+
+/* 不同 Domain 的颜色 */
+.tag-IAA { background: linear-gradient(120deg,#ff6b8a,#ff8fab); }
+.tag-IQA { background: linear-gradient(120deg,#4d95ff,#7fb4ff); }
+.tag-ISTA{ background: linear-gradient(120deg,#b06bff,#d8adff); }
+
+/* Colors based on domain */
+.q-IAA    { color: #b32345; font-weight: 700; }
+.correct-IAA { color: #ff6b8a; font-weight: 700; }
+.wrong-IAA   { color: #6b4450; }
+
+.q-IQA    { color: #1f4fa8; font-weight: 700; }
+.correct-IQA { color: #4d95ff; font-weight: 700; }
+.wrong-IQA   { color: #3a4a60; }
+
+.q-ISTA    { color: #7b35c9; font-weight: 700; }
+.correct-ISTA { color: #b06bff; font-weight: 700; }
+.wrong-ISTA   { color: #4d3a5a; }
+
+.example-text {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #222;       /* 整体偏深色 */
+}
+.option-line {
+  margin-top: 3px;
+}
+</style>
+
+<div class="examples-wrapper">
+
+  <!-- ===================== -->
+  <!-- IAA Row (Row 1)       -->
+  <!-- ===================== -->
+  <div class="examples-row">
+    <!-- 4 CARDS -->
+    <div class="example-card">
+      <img src="figures/bench_examples/iaa_1.png" class="example-img" />
+      <div class="example-text" domain="IAA">
+
+  <!-- Q（深色主题色） -->
+  <div class="q-IAA">
+    Q: What visual element is most prominent due to hierarchical emphasis?
+  </div>
+
+  <!-- 选项：A/B/C/D -->
+  <div class="option-line wrong-IAA">A. Floral design above the circle</div>
+  <div class="option-line wrong-IAA">B. Text below the circle</div>
+
+  <!-- C 正确选项（亮色主题色） -->
+  <div class="option-line correct-IAA">C. Cultural attire within the circle</div>
+
+  <div class="option-line wrong-IAA">D. Historical architecture background</div>
+
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IAA">IAA</div>
+        <div class="tag tag-IAA">Composition & Design</div>
+        <div class="tag tag-IAA">Hierarchical Emphasis</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/iaa_2.png" class="example-img" />
+      <div class="example-text" domain="IAA">
+
+  <!-- Q（深色主题色） -->
+  <div class="q-IAA">
+    Q: What is your assessment of the Emotion & Viewer Response quality in this picture? 
+  </div>
+
+  <!-- 选项：A/B/C/D -->
+  <div class="option-line wrong-IAA">A. Low </div>
+  <div class="option-line wrong-IAA">B. Medium</div>
+
+  <!-- C 正确选项（亮色主题色） -->
+  <div class="option-line correct-IAA">C. High</div>
+
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IAA">IAA</div>
+        <div class="tag tag-IAA">Emotion & Viewer Response</div>
+        <div class="tag tag-IAA">Level Prediction</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/iaa_4.png" class="example-img" />
+      <div class="example-text" domain="IAA">
+
+  <!-- Q（深色主题色） -->
+  <div class="q-IAA">
+    Q: Why do the line dynamics enhance the monkey's playful expression and pose? 
+  </div>
+
+  <!-- 选项：A/B/C/D -->
+  <div class="option-line correct-IAA">A. Lines create movement
+and flow </div>
+  <div class="option-line wrong-IAA">B. Lines emphasize facial details </div>
+
+  <!-- C 正确选项（亮色主题色） -->
+  <div class="option-line wrong-IAA">C. Lines add structural complexity</div>
+
+  <div class="option-line wrong-IAA">D. Lines increase color contrast</div>
+
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IAA">IAA</div>
+        <div class="tag tag-IAA">Visual Elements & Structure</div>
+        <div class="tag tag-IAA">Line Dynamics</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/iaa_3.png" class="example-img" />
+      <div class="example-text" domain="IAA">
+
+  <!-- Q（深色主题色） -->
+  <div class="q-IAA">
+    Q: Why does the artist use layered brushstrokes on the peony petals?
+  </div>
+
+  <!-- 选项：A/B/C/D -->
+  <div class="option-line correct-IAA">A. Simulate natural petal surfaces</div>
+  <div class="option-line wrong-IAA">B. Emphasize the golden background</div>
+
+  <!-- C 正确选项（亮色主题色） -->
+  <div class="option-line wrong-IAA">C. Obscure imperfections</div>
+
+  <div class="option-line wrong-IAA">D. To reduce the visual prominence</div>
+
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IAA">IAA</div>
+        <div class="tag tag-IAA">Technical Execution</div>
+        <div class="tag tag-IAA">Material Proficiency</div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ===================== -->
+  <!-- IQA Row (Row 2)       -->
+  <!-- ===================== -->
+  <div class="examples-row">
+    <!-- 4 CARDS -->
+    <div class="example-card">
+      <img src="figures/bench_examples/iqa_1.png" class="example-img" />
+      <div class="example-text" domain="IQA">
+  <div class="q-IQA">Q: How does the lighting affect texture visibility in the foreground of the image? </div>
+  <div class="option-line correct-IQA">A. Enhances stone texture clarity </div>
+  <div class="option-line wrong-IQA">B. Causes noticeable blurring</div>
+  <div class="option-line wrong-IQA">C. Creates strong shadow contrasts</div>
+  <div class="option-line wrong-IQA">D. Reduces texture detail visibility</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IQA">IQA</div>
+        <div class="tag tag-IQA">Distortion Location</div>
+        <div class="tag tag-IQA">Location Description</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/iqa_2.png" class="example-img" />
+      <div class="example-text" domain="IQA">
+  <div class="q-IQA">Q: Which distortion type is evident in the image, affecting color realism? </div>
+  <div class="option-line wrong-IQA">A. Gaussian YCbCr noise   </div>
+  <div class="option-line wrong-IQA">B. JPEG compression artifacts </div>
+  <div class="option-line correct-IQA">C. Saturate strengthen YCrCb distortion  </div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IQA">IQA</div>
+        <div class="tag tag-IQA"> Distortion Types Presen</div>
+        <div class="tag tag-IQA">Which</div>
+      </div>
+    </div>
+    
+    <div class="example-card">
+      <img src="figures/bench_examples/iqa_3.png" class="example-img" />
+      <div class="example-text" domain="IQA">
+  <div class="q-IQA">Q: Overall, how would you rate the severity of distortions in this image?  </div>
+  <div class="option-line wrong-IQA">A. None (no visible distortion) </div>
+  <div class="option-line correct-IQA">B. Slight (barely noticeable but present)</div>
+  <div class="option-line wrong-IQA">C. Obvious (clearly visible and significantly impacts perception)</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IQA">IQA</div>
+        <div class="tag tag-IQA">Distortion Severity</div>
+        <div class="tag tag-IQA">Severity Level</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/iqa_4.png" class="example-img" />
+      <div class="example-text" domain="IQA">
+  <div class="q-IQA">Q: What specific distortion is most noticeable on the lantern’s surface?  </div>
+  <div class="option-line wrong-IQA">A. Overexposure causing loss of detail </div>
+  <div class="option-line correct-IQA">B. Blurring obscuring texture details </div>
+  <div class="option-line wrong-IQA">C. High contrast creating harsh edges</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IQA">IQA</div>
+        <div class="tag tag-IQA">Distortion Location</div>
+        <div class="tag tag-IQA">Location Description</div>
+      </div>
+    </div>
+  </div> 
+
+  <!-- ===================== -->
+  <!-- ISTA Row (Row 3)      -->
+  <!-- ===================== -->
+  <div class="examples-row">
+    <!-- 4 CARDS -->
+    <div class="example-card">
+      <img src="figures/bench_examples/ista_1.png" class="example-img" />
+      <div class="example-text" domain="ISTA">
+  <div class="q-ISTA">Q: What is the primary 2D contour shape visible in the honeycomb structure? </div>
+  <div class="option-line wrong-ISTA">A. Square </div>
+  <div class="option-line correct-ISTA">B. Hexagon </div>
+  <div class="option-line wrong-ISTA">C. Circle  </div>
+  <div class="option-line wrong-ISTA">D. Pentagon </div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-ISTA">ISTA</div>
+        <div class="tag tag-ISTA">Geometric Composition</div>
+        <div class="tag tag-ISTA">2D Contour</div>
+      </div>
+    </div>
+
+     <div class="example-card">
+      <img src="figures/bench_examples/ista_2.png" class="example-img" />
+      <div class="example-text" domain="ISTA">
+  <div class="q-ISTA">Q: What term best describes the surface texture of the sandy scene? </div>
+  <div class="option-line wrong-ISTA">A. Grooved  </div>
+  <div class="option-line correct-ISTA">B. Pitted  </div>
+  <div class="option-line wrong-ISTA">C. Crystalline   </div>
+  <div class="option-line wrong-ISTA">D. Braided </div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-ISTA">ISTA</div>
+        <div class="tag tag-ISTA">Physical Structure</div>
+        <div class="tag tag-ISTA">Base Morphology</div>
+      </div>
+    </div>
+
+         <div class="example-card">
+      <img src="figures/bench_examples/ista_3.png" class="example-img" />
+      <div class="example-text" domain="ISTA">
+  <div class="q-ISTA">Q: Which stylistic classification best describes the overall visual theme of the limousine interior? </div>
+  <div class="option-line wrong-ISTA">A. Futuristic Minimalism </div>
+  <div class="option-line correct-ISTA">B. Modern Luxury  </div>
+  <div class="option-line wrong-ISTA">C. Art Deco  </div>
+  <div class="option-line wrong-ISTA">D. Cyberpunk
+ </div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-ISTA">ISTA</div>
+        <div class="tag tag-ISTA">Semantic Perception</div>
+        <div class="tag tag-ISTA">Stylistic Classification</div>
+      </div>
+    </div>
+
+
+     <div class="example-card">
+      <img src="figures/bench_examples/ista_4.png" class="example-img" />
+      <div class="example-text" domain="ISTA">
+  <div class="q-ISTA">Q: Which component exhibits the highest glossiness in surface properties?  </div>
+  <div class="option-line wrong-ISTA">A. Salmon  </div>
+  <div class="option-line wrong-ISTA">B. Rice </div>
+  <div class="option-line correct-ISTA">C. Stuffed Pepper    </div>
+  <div class="option-line wrong-ISTA">D. Spinach Leaves </div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-ISTA">ISTA</div>
+        <div class="tag tag-ISTA">Material Representation</div>
+        <div class="tag tag-ISTA">Surface Behavior</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="interactive-viewer-title">
+  Leaderboard
+</div>
+
+      <!-- ========================================= -->
+<!-- =========== UNIPERCEPT-BENCH ============ -->
+<!-- ========================================= -->
+<style>
+/* ====== Layout Wrapper ====== */
+.bench-container {
+  margin-top: 35px;
+  font-family: "Georgia", "Times New Roman", serif;
+
+  /* → 居中整体内容 */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* ====== Subtitle (Choose Domain / Choose Task) ====== */
+.bench-subtitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  text-align: center;
+  color: #222;
+}
+
+
+/* ====== DOMAIN Buttons ====== */
+.domain-selector {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 32px;
+
+  justify-content: center;
+}
+
+.domain-btn {
+  padding: 10px 22px;
+  border-radius: 40px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #ffffff;
+
+  cursor: pointer;
+  transition: 0.22s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+.domain-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.domain-btn.active {
+  color: white;
+  border: none;
+}
+
+/* Domain gradients (keep original colors) */
+.domain-IAA.active { background: linear-gradient(120deg,#ff6b8a,#ff8fa8); }
+.domain-IQA.active { background: linear-gradient(120deg,#4d95ff,#76b4ff); }
+.domain-ISTA.active { background: linear-gradient(120deg,#b06bff,#d5a3ff); }
+
+
+/* ====== TASK Buttons ====== */
+.task-selector {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 35px;
+  justify-content: center;
+}
+
+.task-btn {
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #fafafa;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.task-btn:hover {
+  background: #f1f1f1;
+}
+
+.task-btn.active {
+  background: #222;
+  color: #fff;
+}
+
+
+/* ====== TABLE AREA ====== */
+#bench-table-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;       /* 水平居中 */
+}
+
+/* Placeholder box */
+.table-placeholder {
+  width: 80%;                   /* 居中的关键 → 不再铺满 */
+  max-width: 900px;
+  height: 260px;
+
+  border-radius: 14px;
+  background: #f4f4f8;
+  border: 1px solid rgba(0,0,0,0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #666;
+
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+}
+
+/* hide */
+.table-content {
+  display: none;
+}
+</style>
+
+
+<!-- ====== HTML Section ====== -->
+<div class="bench-container">
+
+  <div class="bench-subtitle">Choose Perceptual Domain</div>
+  <div class="domain-selector">
+    <div class="domain-btn domain-IAA" data-domain="IAA">IAA</div>
+    <div class="domain-btn domain-IQA" data-domain="IQA">IQA</div>
+    <div class="domain-btn domain-ISTA" data-domain="ISTA">ISTA</div>
+  </div>
+
+  <div class="bench-subtitle">Choose Task</div>
+  <div class="task-selector">
+    <div class="task-btn" data-task="VR">VR</div>
+    <div class="task-btn" data-task="VQA">VQA</div>
+  </div>
+
+
+</div>
+<!-- Leaderboard 样式（与你现有风格一致） -->
+<style>
+.leaderboard-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  margin-top: 10px;
+  font-family: "Inter", sans-serif;
+}
+
+.leaderboard-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.leaderboard-table {
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.leaderboard-table th {
+  background: #f6f6f8;
+  padding: 10px 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.leaderboard-table td {
+  padding: 8px 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+}
+
+/* 隔行变色 */
+.leaderboard-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* Top 3 高亮 */
+.rank1 { background: #fff6d6 !important; font-weight: 700; }
+.rank2 { background: #eef2ff !important; font-weight: 700; }
+.rank3 { background: #f8edff !important; font-weight: 700; }
+
+/* hover */
+.leaderboard-table tbody tr:hover {
+  background: #edf5ff;
+}
+</style>
+
+<!-- 6 TABLE PLACEHOLDERS -->
+<div class="table-content" id="IAA-VR">
+    <div class="leaderboard-wrapper">
+  <table class="leaderboard-table">
+
+    <thead>
+<tr>
+  <th>Models</th>
+  <th>ArtiMuse-10K</th>
+  <th>AVA</th>
+  <th>TAD66K</th>
+  <th>FLICKR-AES</th>
+  <th>Avg</th>
+</tr>
+</thead>
+
+<tbody>
+<tr class="rank1">
+<td>🥇 UniPercept (Ours)</td>
+<td><span class="bluecell100">0.746/0.738</span></td>
+<td><span class="bluecell100">0.589/0.577</span></td>
+<td><span class="bluecell100">0.336/0.346</span></td>
+<td><span class="bluecell100">0.688/0.681</span></td>
+<td><b><span class="bluecell100">0.590/0.586</span></b></td>
+</tr>
+<tr class="rank2">
+<td>🥈 GPT-4o</td>
+<td>0.333/0.276</td>
+<td><span class="bluecell70">0.509/0.485</span></td>
+<td>0.278/0.282</td>
+<td>0.605/0.597</td>
+<td><span class="bluecell70">0.431/0.410</span></td>
+</tr>
+<tr class="rank3">
+<td>🥉 GLM-4.5-V-106B</td>
+<td>0.346/0.249</td>
+<td>0.464/0.420</td>
+<td><span class="bluecell70">0.289/0.278</span></td>
+<td><span class="bluecell70">0.651/0.597</span></td>
+<td>0.438/0.386</td>
+</tr>
+<tr>
+<td>ArtiMuse</td>
+<td><span class="bluecell70">0.614/0.627</span></td>
+<td>0.397/0.385</td>
+<td>0.230/0.232</td>
+<td>0.349/0.334</td>
+<td><b>0.398/0.395</b></td>
+</tr>
+<tr>
+<td>QwenVL-2.5-72B</td>
+<td>0.233/0.197</td>
+<td>0.408/0.387</td>
+<td>0.232/0.235</td>
+<td>0.626/0.589</td>
+<td><b>0.375/0.352</b></td>
+</tr>
+<tr>
+<td>LLaVA-OneVision-1.5-8B</td>
+<td>0.274/0.212</td>
+<td>0.381/0.378</td>
+<td>0.213/0.224</td>
+<td>0.586/0.541</td>
+<td>0.364/0.339</td>
+</tr>
+<tr>
+<td>Q-Insight*</td>
+<td>0.228/0.175</td>
+<td>0.405/0.376</td>
+<td>0.212/0.217</td>
+<td>0.617/0.537</td>
+<td>0.366/0.326</td>
+</tr>
+<tr>
+<td>InternVL3.5-38B</td>
+<td>0.219/0.175</td>
+<td>0.359/0.357</td>
+<td>0.201/0.208</td>
+<td>0.559/0.529</td>
+<td>0.334/0.317</td>
+</tr>
+<tr>
+<td>InternVL3-8B</td>
+<td>0.245/0.211</td>
+<td>0.372/0.344</td>
+<td>0.205/0.191</td>
+<td>0.547/0.476</td>
+<td>0.342/0.306</td>
+</tr>
+<tr>
+<td>QwenVL-2.5-7B</td>
+<td>0.223/0.143</td>
+<td>0.359/0.324</td>
+<td>0.208/0.195</td>
+<td>0.588/0.520</td>
+<td>0.345/0.296</td>
+</tr>
+<tr>
+<td>Q-Align*</td>
+<td>0.551/0.573</td>
+<td>0.398/0.386</td>
+<td>0.194/0.197</td>
+<td>0.137/0.123</td>
+<td>0.320/0.320</td>
+</tr>
+<tr>
+<td>InternVL3-78B</td>
+<td>0.223/0.206</td>
+<td>0.385/0.344</td>
+<td>0.221/0.220</td>
+<td>0.518/0.433</td>
+<td>0.337/0.301</td>
+</tr>
+<tr>
+<td>Llama-4-Scout</td>
+<td>0.204/0.147</td>
+<td>0.345/0.329</td>
+<td>0.236/0.210</td>
+<td>0.548/0.506</td>
+<td>0.333/0.298</td>
+</tr>
+<tr>
+<td>QwenVL-3-32B</td>
+<td>0.227/0.130</td>
+<td>0.353/0.198</td>
+<td>0.200/0.095</td>
+<td>0.572/0.413</td>
+<td>0.338/0.209</td>
+</tr>
+<tr>
+<td>InternVL3.5-8B</td>
+<td>0.135/0.104</td>
+<td>0.308/0.295</td>
+<td>0.180/0.182</td>
+<td>0.519/0.448</td>
+<td>0.286/0.257</td>
+</tr>
+<tr>
+<td>QwenVL-3-8B</td>
+<td>0.156/0.094</td>
+<td>0.280/0.170</td>
+<td>0.191/0.121</td>
+<td>0.507/0.388</td>
+<td>0.283/0.193</td>
+</tr>
+<tr>
+<td>Gemini-2.5-pro</td>
+<td>0.187/0.035</td>
+<td>0.248/0.100</td>
+<td>0.143/0.037</td>
+<td>0.357/0.206</td>
+<td>0.234/0.095</td>
+</tr>
+<tr>
+<td>Claude-Sonnet-4.5-Think</td>
+<td>0.066/0.103</td>
+<td>0.018/0.019</td>
+<td>0.026/0.039</td>
+<td>-/-</td>
+<td>0.037/0.054</td>
+</tr>
+<tr>
+<td>Claude-Sonnet-4.5</td>
+<td>0.041/0.027</td>
+<td>0.003/0.013</td>
+<td>0.040/0.047</td>
+<td>0.037/0.049</td>
+<td>0.030/0.034</td>
+</tr>
+</tbody>
+
+  </table>
+</div>
+</div>
+
+<div class="table-content" id="IQA-VR">
+    <div class="leaderboard-wrapper">
+  <table class="leaderboard-table">
+    <thead>
+<tr>
+  <th>Models</th>
+  <th>KonIQ-10K</th>
+  <th>SPAQ</th>
+  <th>KADID</th>
+  <th>PIPAL</th>
+  <th>Overall</th>
+</tr>
+</thead>
+
+<tbody>
+<tr class="rank1">
+<td>🥇 UniPercept (Ours)</td>
+<td><span class="bluecell70">0.940/0.949</span></td>
+<td><span class="bluecell70">0.904/0.895</span></td>
+<td><span class="bluecell100">0.872/0.870</span></td>
+<td><span class="bluecell100">0.581/0.594</span></td>
+<td><b><span class="bluecell100">0.824/0.827</span></b></td>
+</tr>
+<tr class="rank2">
+<td>🥈 Q-Insight</td>
+<td>0.933/0.916</td>
+<td><span class="bluecell100">0.907/0.905</span></td>
+<td><span class="bluecell70">0.742/0.736</span></td>
+<td><span class="bluecell70">0.486/0.474</span></td>
+<td><b><span class="bluecell70">0.767/0.758</span></b></td>
+</tr>
+<tr class="rank3">
+<td>🥉 DeQA</td>
+<td><span class="bluecell100">0.953/0.941</span></td>
+<td>0.895/0.896</td>
+<td>0.694/0.687</td>
+<td>0.472/0.478</td>
+<td><b>0.753/0.750</b></td>
+</tr>
+<tr>
+<td>Q-Align*</td>
+<td>0.941/0.940</td>
+<td>0.886/0.887</td>
+<td>0.674/0.684</td>
+<td>0.403/0.419</td>
+<td>0.726/0.733</td>
+</tr>
+<tr>
+<td>GPT-4o</td>
+<td>0.695/0.744</td>
+<td>0.874/0.881</td>
+<td>0.677/0.646</td>
+<td>0.325/0.349</td>
+<td>0.643/0.655</td>
+</tr>
+<tr>
+<td>QwenVL-3-32B</td>
+<td>0.796/0.838</td>
+<td>0.690/0.657</td>
+<td>0.673/0.682</td>
+<td>0.414/0.402</td>
+<td>0.643/0.644</td>
+</tr>
+<tr>
+<td>Q-Insight*</td>
+<td>0.733/0.750</td>
+<td>0.800/0.938</td>
+<td>0.580/0.548</td>
+<td>0.369/0.368</td>
+<td>0.621/0.651</td>
+</tr>
+<tr>
+<td>QwenVL-3-8B</td>
+<td>0.761/0.822</td>
+<td>0.612/0.604</td>
+<td>0.723/0.696</td>
+<td>0.434/0.427</td>
+<td>0.633/0.637</td>
+</tr>
+<tr>
+<td>InternVL3-78B</td>
+<td>0.635/0.676</td>
+<td>0.849/0.852</td>
+<td>0.579/0.553</td>
+<td>0.415/0.457</td>
+<td>0.619/0.634</td>
+</tr>
+<tr>
+<td>InternVL3.5-38B</td>
+<td>0.578/0.652</td>
+<td>0.840/0.831</td>
+<td>0.568/0.537</td>
+<td>0.448/0.457</td>
+<td>0.608/0.619</td>
+</tr>
+<tr>
+<td>QwenVL-2.5-72B</td>
+<td>0.762/0.820</td>
+<td>-/-</td>
+<td>0.606/0.570</td>
+<td>0.381/0.407</td>
+<td>0.583/0.599</td>
+</tr>
+<tr>
+<td>InternVL3-8B</td>
+<td>0.574/0.646</td>
+<td>0.828/0.800</td>
+<td>0.496/0.475</td>
+<td>0.435/0.459</td>
+<td>0.583/0.595</td>
+</tr>
+<tr>
+<td>InternVL3.5-8B</td>
+<td>0.663/0.660</td>
+<td>0.783/0.777</td>
+<td>0.541/0.478</td>
+<td>0.351/0.386</td>
+<td>0.585/0.575</td>
+</tr>
+<tr>
+<td>LLaVA-OneVision-1.5-8B</td>
+<td>0.639/0.744</td>
+<td>-/-</td>
+<td>0.505/0.534</td>
+<td>0.417/0.407</td>
+<td>0.520/0.562</td>
+</tr>
+<tr>
+<td>QwenVL-2.5-7B</td>
+<td>0.708/0.762</td>
+<td>-/-</td>
+<td>0.521/0.517</td>
+<td>0.350/0.361</td>
+<td>0.526/0.547</td>
+</tr>
+<tr>
+<td>Gemini-2.5-pro</td>
+<td>0.582/0.316</td>
+<td>0.087/0.212</td>
+<td>0.436/0.274</td>
+<td>0.225/-0.019</td>
+<td>0.333/0.196</td>
+</tr>
+<tr>
+<td>GLM-4.5-V-106B</td>
+<td>0.721/0.765</td>
+<td>-/-</td>
+<td>-0.142/-0.128</td>
+<td>0.013/0.020</td>
+<td>0.138/0.155</td>
+</tr>
+<tr>
+<td>Llama-4-Scout</td>
+<td>0.503/0.653</td>
+<td>-/-</td>
+<td>-/-</td>
+<td>-/-</td>
+<td>0.089/0.170</td>
+</tr>
+<tr>
+<td>Claude-Sonnet-4.5</td>
+<td>-/-</td>
+<td>0.036/0.085</td>
+<td>0.223/0.273</td>
+<td>-0.131/-0.088</td>
+<td>0.023/0.057</td>
+</tr>
+<tr>
+<td>Claude-Sonnet-4.5-Think</td>
+<td>-/-</td>
+<td>-/-</td>
+<td>-/-</td>
+<td>-/-</td>
+<td>-/-</td>
+</tr>
+</tbody>
+
+  </table>
+</div>
+</div>
+
+<div class="table-content" id="ISTA-VR">
+    <div class="leaderboard-wrapper">
+  <table class="leaderboard-table">
+
+    <thead>
+<tr>
+  <th>Models</th>
+  <th>ISTA-10K</th>
+</tr>
+</thead>
+
+<tbody>
+<tr class="rank1">
+<td>🥇 UniPercept (Ours)</td>
+<td><span class="bluecell100">0.778/0.767</span></td>
+</tr>
+<tr class="rank2">
+<td>🥈 InternVL3.5-38B</td>
+<td><span class="bluecell70">0.262/0.345</span></td>
+</tr>
+<tr class="rank3">
+<td>🥉 QwenVL-2.5-72B</td>
+<td>0.091/0.148</td>
+</tr>
+<tr>
+<td>Claude-Sonnet-4.5</td>
+<td>0.125/0.089</td>
+</tr>
+<tr>
+<td>Q-Insight*</td>
+<td>0.060/0.152</td>
+</tr>
+<tr>
+<td>GLM-4.5-V-106B</td>
+<td>0.083/0.117</td>
+</tr>
+<tr>
+<td>QwenVL-3-32B</td>
+<td>0.084/0.106</td>
+</tr>
+<tr>
+<td>GPT-4o</td>
+<td>-0.003/0.116</td>
+</tr>
+<tr>
+<td>QwenVL-3-8B</td>
+<td>0.033/0.044</td>
+</tr>
+<tr>
+<td>QwenVL-2.5-7B</td>
+<td>-0.046/0.076</td>
+</tr>
+<tr>
+<td>Llama-4-Scout</td>
+<td>-0.025/0.047</td>
+</tr>
+<tr>
+<td>LLaVA-OneVision-1.5-8B</td>
+<td>-0.094/0.027</td>
+</tr>
+<tr>
+<td>InternVL3-8B</td>
+<td>-0.127/0.046</td>
+</tr>
+<tr>
+<td>InternVL3.5-8B</td>
+<td>-0.096/-0.025</td>
+</tr>
+<tr>
+<td>Gemini-2.5-pro</td>
+<td>-0.230/-0.118</td>
+</tr>
+<tr>
+<td>Claude-Sonnet-4.5-Think</td>
+<td>-/-</td>
+</tr>
+<tr>
+<td>InternVL3-78B</td>
+<td>-/-</td>
+</tr>
+<tr>
+<td>ArtiMuse</td>
+<td>-/-</td>
+</tr>
+<tr>
+<td>DeQA</td>
+<td>-/-</td>
+</tr>
+<tr>
+<td>Q-Align*</td>
+<td>-/-</td>
+</tr>
+<tr>
+<td>Q-Insight</td>
+<td>-/-</td>
+</tr>
+</tbody>
+
+  </table>
+</div>
+</div>
+
+<div class="table-content" id="ISTA-VQA">
+    <div class="leaderboard-wrapper">
+  <table class="leaderboard-table">
+
+<thead>
+  <tr>
+    <th rowspan="2">Models</th>
+
+    <!-- ISTA Categories -->
+    <th colspan="5">ISTA Categories</th>
+
+    <!-- QA Templates -->
+    <th colspan="5">QA Templates</th>
+
+    <th rowspan="2">Overall</th>
+  </tr>
+
+  <tr>
+    <!-- ISTA Categories -->
+    <th>Scene.</th>
+    <th>Phys.</th>
+    <th>Mat.</th>
+    <th>Geo.</th>
+    <th>Sem.</th>
+
+    <!-- QA Templates -->
+    <th>How</th>
+    <th>What</th>
+    <th>Which</th>
+    <th>Why</th>
+    <th>Yes-No</th>
+  </tr>
+</thead>
+
+    <tbody>
+<tr class="rank1">
+  <td>🥇 <b>UniPercept (Ours)</b></td>
+  <td>89.74%</td><td>85.71%</td><td>82.44%</td><td>93.94%</td><td>78.51%</td>
+  <td>82.69%</td><td>89.24%</td><td>78.54%</td><td>83.12%</td><td>85.51%</td>
+  <td><b>84.23%</b></td>
+</tr>
+<tr class="rank2">
+  <td>🥈 <b>LLaVA-OneVision-1.5-8B</b></td>
+  <td>78.63%</td><td>85.16%</td><td>82.44%</td><td>72.73%</td><td>80.17%</td>
+  <td>83.33%</td><td>81.40%</td><td>75.30%</td><td>84.42%</td><td>88.41%</td>
+  <td>81.13%</td>
+</tr>
+<tr class="rank3">
+  <td>🥉 <b>InternVL3-78B</b></td>
+  <td>79.06%</td><td>85.16%</td><td>77.42%</td><td>69.70%</td><td>78.51%</td>
+  <td>81.41%</td><td>79.65%</td><td>73.68%</td><td>84.42%</td><td>81.16%</td>
+  <td><b>79.28%</b></td>
+</tr>
+<tr>
+  <td>Gemini-2.5-pro</td>
+  <td>76.50%</td><td>82.42%</td><td>77.06%</td><td>66.67%</td><td>77.69%</td>
+  <td>78.21%</td><td>78.20%</td><td>75.71%</td><td>82.47%</td><td>71.01%</td>
+  <td><b>77.73%</b></td>
+</tr>
+<tr>
+  <td>Claude-Sonnet-4.5</td>
+  <td>76.92%</td><td>78.57%</td><td>74.91%</td><td>90.91%</td><td>77.69%</td>
+  <td>76.92%</td><td>77.03%</td><td>74.49%</td><td>81.82%</td><td>79.71%</td>
+  <td>77.32%</td>
+</tr>
+<tr>
+  <td>GLM-4.5-V-106BA12B</td>
+  <td>81.20%</td><td>79.67%</td><td>74.55%</td><td>72.73%</td><td>75.21%</td>
+  <td>80.77%</td><td>76.74%</td><td>73.68%</td><td>79.87%</td><td>78.26%</td>
+  <td>77.22%</td>
+</tr>
+<tr>
+  <td>Claude-Sonnet-4.5-Think</td>
+  <td>77.35%</td><td>78.02%</td><td>73.12%</td><td>87.88%</td><td>75.21%</td>
+  <td>76.28%</td><td>74.71%</td><td>74.09%</td><td>81.82%</td><td>76.81%</td>
+  <td>76.08%</td>
+</tr>
+<tr>
+  <td>GPT-4o</td>
+  <td>75.64%</td><td>79.12%</td><td>73.48%</td><td>33.33%</td><td>77.27%</td>
+  <td>71.79%</td><td>78.78%</td><td>69.23%</td><td>77.92%</td><td>72.46%</td>
+  <td>74.64%</td>
+</tr>
+<tr>
+  <td>InternVL3-8B</td>
+  <td>75.64%</td><td>79.12%</td><td>73.48%</td><td>33.33%</td><td>77.27%</td>
+  <td>71.79%</td><td>78.78%</td><td>69.23%</td><td>77.92%</td><td>72.46%</td>
+  <td>74.64%</td>
+</tr>
+<tr>
+  <td>QwenVL-2.5-Instruct-7B</td>
+  <td>74.79%</td><td>72.53%</td><td>74.91%</td><td>51.52%</td><td>73.55%</td>
+  <td>73.72%</td><td>77.33%</td><td>66.80%</td><td>74.03%</td><td>73.91%</td>
+  <td>73.30%</td>
+</tr>
+<tr>
+  <td>Llama-4-Scout</td>
+  <td>73.50%</td><td>75.27%</td><td>71.68%</td><td>72.73%</td><td>67.77%</td>
+  <td>75.64%</td><td>69.77%</td><td>69.64%</td><td>77.27%</td><td>69.57%</td>
+  <td>71.86%</td>
+</tr>
+<tr>
+  <td>InternVL3.5-38B</td>
+  <td>50.00%</td><td>55.49%</td><td>61.29%</td><td>30.30%</td><td>35.95%</td>
+  <td>50.64%</td><td>59.30%</td><td>42.91%</td><td>37.01%</td><td>57.97%</td>
+  <td>50.10%</td>
+</tr>
+<tr>
+  <td>InternVL3.5-8B</td>
+  <td>54.27%</td><td>50.55%</td><td>58.42%</td><td>39.39%</td><td>36.36%</td>
+  <td>46.79%</td><td>56.69%</td><td>48.58%</td><td>29.87%</td><td>71.01%</td>
+  <td>49.79%</td>
+</tr>
+<tr>
+  <td>QwenVL-3-Instruct-8B</td>
+  <td>27.78%</td><td>32.42%</td><td>25.45%</td><td>39.39%</td><td>24.79%</td>
+  <td>14.74%</td><td>23.26%</td><td>28.34%</td><td>25.32%</td><td>81.16%</td>
+  <td>27.63%</td>
+</tr>
+<tr>
+  <td>QwenVL-3-Instruct-32B</td>
+  <td>26.50%</td><td>24.73%</td><td>19.00%</td><td>15.15%</td><td>18.60%</td>
+  <td>11.54%</td><td>18.31%</td><td>22.67%</td><td>17.53%</td><td>66.67%</td>
+  <td>21.65%</td>
+</tr>
+<tr>
+  <td>QwenVL-2.5-Instruct-72B</td>
+  <td>14.10%</td><td>29.12%</td><td>19.71%</td><td>12.12%</td><td>18.60%</td>
+  <td>20.51%</td><td>12.21%</td><td>14.57%</td><td>31.17%</td><td>46.38%</td>
+  <td>19.59%</td>
+</tr>
+</tbody>
+
+  </table>
+</div>
+</div>
+
+<div class="table-content" id="IAA-VQA">
+
+  <!-- <div class="leaderboard-title">VQA – IAA Leaderboard</div> -->
+
+  <div class="leaderboard-wrapper">
+
+    <table class="leaderboard-table">
+
+      <!-- ========================= -->
+      <!--         TABLE HEADER      -->
+      <!-- ========================= -->
+      <thead>
+        <!-- 第一行：分组标题 -->
+        <tr>
+          <th rowspan="2">Models</th>
+          <th colspan="8">IAA Categories</th>
+          <th colspan="6">QA Templates</th>
+          <th rowspan="2">Overall</th>
+        </tr>
+
+        <!-- 第二行：细项标题 -->
+        <tr>
+          <th>Comp.</th><th>VisStr.</th><th>Tech.</th><th>Creat.</th>
+          <th>Theme.</th><th>Emo.</th><th>Gest.</th><th>CompEv.</th>
+
+          <th>Lv.Pred</th><th>How</th><th>What</th><th>Which</th>
+          <th>Why</th><th>Yes-No</th>
+        </tr>
+      </thead>
+
+      <!-- ========================= -->
+      <!--        TABLE BODY         -->
+      <!-- ========================= -->
+<tbody>
+<tr class="rank1">
+        <td>🥇 <b>UniPercept (Ours)</b></td>
+        <td>80.00%</td><td>77.54%</td><td>69.70%</td><td>80.56%</td>
+        <td>79.26%</td><td>80.95%</td><td>67.53%</td><td>69.77%</td>
+        <td>63.71%</td><td>92.20%</td><td>81.88%</td><td>75.32%</td><td>86.67%</td><td>84.62%</td>
+        <td><b>76.55%</b></td>
+      </tr>
+<tr class="rank2">
+        <td>🥈 <b>InternVL3-78B</b></td>
+        <td>71.79%</td><td>73.26%</td><td>61.21%</td><td>73.15%</td>
+        <td>74.81%</td><td>74.29%</td><td>53.25%</td><td>37.21%</td>
+        <td>45.14%</td><td>85.82%</td><td>81.16%</td><td>72.15%</td><td>86.00%</td><td>75.64%</td>
+        <td><b>68.28%</b></td>
+      </tr>
+<tr class="rank3">
+        <td>🥉 <b>Gemini-2.5-pro</b></td>
+        <td>71.79%</td><td>68.45%</td><td>61.59%</td><td>76.85%</td>
+        <td>67.41%</td><td>63.81%</td><td>61.84%</td><td>37.21%</td>
+        <td>45.98%</td><td>78.72%</td><td>73.91%</td><td>67.72%</td><td>84.67%</td><td>84.62%</td>
+        <td><b>66.44%</b></td>
+      </tr>
+<tr>
+        <td>ArtiMuse</td>
+        <td>67.69%</td><td>68.45%</td><td>64.85%</td><td>74.07%</td>
+        <td>71.85%</td><td>64.76%</td><td>61.04%</td><td>32.56%</td>
+        <td>39.14%</td><td>88.65%</td><td>76.81%</td><td>72.78%</td><td>85.33%</td><td>79.49%</td>
+        <td>66.31%</td>
+      </tr>
+<tr>
+        <td>Claude-Sonnet-4.5</td>
+        <td>70.26%</td><td>70.05%</td><td>62.20%</td><td>71.30%</td>
+        <td>64.44%</td><td>67.62%</td><td>50.00%</td><td>46.51%</td>
+        <td>46.84%</td><td>77.30%</td><td>76.09%</td><td>65.19%</td><td>86.00%</td><td>69.23%</td>
+        <td>65.45%</td>
+      </tr>
+<tr>
+        <td>Claude-4.5-Think</td>
+        <td>71.28%</td><td>69.52%</td><td>61.21%</td><td>68.52%</td>
+        <td>62.22%</td><td>66.67%</td><td>53.25%</td><td>41.86%</td>
+        <td>44.57%</td><td>75.89%</td><td>77.54%</td><td>67.09%</td><td>86.00%</td><td>66.67%</td>
+        <td>64.73%</td>
+      </tr>
+<tr>
+        <td>GLM-4.5-V-106B</td>
+        <td>67.18%</td><td>65.78%</td><td>60.98%</td><td>75.00%</td>
+        <td>64.44%</td><td>68.57%</td><td>51.32%</td><td>46.51%</td>
+        <td>45.40%</td><td>71.63%</td><td>78.26%</td><td>65.82%</td><td>84.67%</td><td>70.51%</td>
+        <td>64.46%</td>
+      </tr>
+<tr>
+        <td>QwenVL-2.5-7B</td>
+        <td>67.18%</td><td>70.74%</td><td>56.36%</td><td>66.67%</td>
+        <td>68.89%</td><td>63.81%</td><td>48.05%</td><td>37.21%</td>
+        <td>38.86%</td><td>76.76%</td><td>75.36%</td><td>67.09%</td><td>87.33%</td><td>71.79%</td>
+        <td>63.19%</td>
+      </tr>
+<tr>
+        <td>LLaVA-OneVision-1.5-8B</td>
+        <td>67.18%</td><td>68.62%</td><td>61.21%</td><td>62.96%</td>
+        <td>67.41%</td><td>62.86%</td><td>53.25%</td><td>20.93%</td>
+        <td>34.86%</td><td>85.21%</td><td>79.71%</td><td>65.82%</td><td>83.33%</td><td>69.23%</td>
+        <td>62.60%</td>
+      </tr>
+<tr>
+        <td>InternVL3-8B</td>
+        <td>65.64%</td><td>67.55%</td><td>59.39%</td><td>67.59%</td>
+        <td>69.63%</td><td>62.86%</td><td>50.65%</td><td>25.58%</td>
+        <td>36.00%</td><td>81.69%</td><td>73.91%</td><td>67.72%</td><td>86.00%</td><td>71.79%</td>
+        <td>62.60%</td>
+      </tr>
+<tr>
+        <td>Llama-4-Scout</td>
+        <td>62.56%</td><td>68.45%</td><td>59.76%</td><td>61.11%</td>
+        <td>57.78%</td><td>70.48%</td><td>48.68%</td><td>32.56%</td>
+        <td>43.97%</td><td>70.92%</td><td>69.57%</td><td>61.39%</td><td>77.33%</td><td>70.51%</td>
+        <td>60.91%</td>
+      </tr>
+<tr>
+        <td>GPT-4o</td>
+        <td>64.62%</td><td>59.57%</td><td>57.58%</td><td>60.19%</td>
+        <td>65.19%</td><td>67.62%</td><td>51.95%</td><td>30.23%</td>
+        <td>38.86%</td><td>78.17%</td><td>72.46%</td><td>62.66%</td><td>72.67%</td><td>70.51%</td>
+        <td>60.04%</td>
+      </tr>
+<tr>
+        <td>InternVL3.5-38B</td>
+        <td>37.44%</td><td>40.11%</td><td>27.88%</td><td>39.81%</td>
+        <td>34.81%</td><td>38.10%</td><td>45.45%</td><td>6.98%</td>
+        <td>34.00%</td><td>47.52%</td><td>26.09%</td><td>28.48%</td><td>37.33%</td><td>50.00%</td>
+        <td>35.67%</td>
+      </tr>
+<tr>
+        <td>InternVL3-5-8B</td>
+        <td>32.31%</td><td>29.41%</td><td>30.30%</td><td>26.85%</td>
+        <td>28.89%</td><td>26.67%</td><td>23.38%</td><td>9.30%</td>
+        <td>17.14%</td><td>41.13%</td><td>26.81%</td><td>19.62%</td><td>36.00%</td><td>58.97%</td>
+        <td>28.18%</td>
+      </tr>
+<tr>
+        <td>QwenVL-2.5-72B</td>
+        <td>22.05%</td><td>24.60%</td><td>25.45%</td><td>29.63%</td>
+        <td>30.37%</td><td>18.10%</td><td>19.48%</td><td>6.98%</td>
+        <td>14.00%</td><td>19.86%</td><td>17.39%</td><td>24.05%</td><td>41.33%</td><td>51.28%</td>
+        <td>23.74%</td>
+      </tr>
+</tbody>
+
+
+    </table>
+  </div>
+</div>
+
+    <div class="table-content" id="IQA-VQA">
+      <div class="leaderboard-wrapper">
+  <table class="leaderboard-table">
+
+    <!-- ===================== 表头（两行） ===================== -->
+    <thead>
+      <tr>
+        <th rowspan="2">Models</th>
+        <th colspan="3">IQA Categories</th>
+        <th colspan="6">QA Templates</th>
+        <th rowspan="2">Overall</th>
+      </tr>
+      <tr>
+        <th>Loc.</th><th>Sev.</th><th>Type.</th>
+        <th>Lv.Pred</th><th>How</th><th>What</th><th>Which</th><th>Why</th><th>Yes-No</th>
+      </tr>
+    </thead>
+
+ <tbody>
+<tr class="rank1">
+  <td>🥇 <b>UniPercept (Ours)</b></td>
+  <td>77.43%</td><td>79.60%</td><td>90.98%</td>
+  <td>79.60%</td><td>87.03%</td><td>80.86%</td><td>75.60%</td><td>83.42%</td><td>79.31%</td>
+  <td><b>81.07%</b></td>
+</tr>
+<tr class="rank2">
+  <td>🥈 <b>LLaVA-OneVision-1.5-Instruct-8B</b></td>
+  <td>76.51%</td><td>59.87%</td><td>77.46%</td>
+  <td>59.87%</td><td>91.35%</td><td>70.37%</td><td>61.31%</td><td>82.35%</td><td>75.86%</td>
+  <td><b>72.15%</b></td>
+</tr>
+<tr class="rank3">
+  <td>🥉 <b>InternVL3-78B</b></td>
+  <td>75.41%</td><td>51.84%</td><td>81.56%</td>
+  <td>51.84%</td><td>93.51%</td><td>66.67%</td><td>63.10%</td><td>88.24%</td><td>66.67%</td>
+  <td><b>70.31%</b></td>
+</tr>
+<tr>
+  <td>GPT-4o</td>
+  <td>71.74%</td><td>53.18%</td><td>70.49%</td>
+  <td>53.18%</td><td>83.78%</td><td>59.26%</td><td>61.31%</td><td>80.21%</td><td>67.82%</td>
+  <td>66.36%</td>
+</tr>
+<tr>
+  <td>Claude-Sonnet-4.5-Think</td>
+  <td>71.19%</td><td>55.52%</td><td>66.80%</td>
+  <td>55.52%</td><td>89.19%</td><td>50.00%</td><td>51.79%</td><td>82.89%</td><td>72.41%</td>
+  <td>65.90%</td>
+</tr>
+<tr>
+  <td>QwenVL-2.5-Instruct-7B</td>
+  <td>74.13%</td><td>48.83%</td><td>66.39%</td>
+  <td>48.83%</td><td>88.65%</td><td>60.49%</td><td>53.57%</td><td>78.61%</td><td>77.01%</td>
+  <td>65.44%</td>
+</tr>
+<tr>
+  <td>Claude-Sonnet-4.5</td>
+  <td>71.19%</td><td>51.51%</td><td>66.80%</td>
+  <td>51.51%</td><td>90.81%</td><td>50.00%</td><td>50.60%</td><td>82.89%</td><td>71.26%</td>
+  <td>64.80%</td>
+</tr>
+<tr>
+  <td>InternVL3-8B</td>
+  <td>71.56%</td><td>52.84%</td><td>59.43%</td>
+  <td>52.84%</td><td>87.03%</td><td>59.88%</td><td>48.81%</td><td>71.12%</td><td>71.26%</td>
+  <td>63.69%</td>
+</tr>
+<tr>
+  <td>Llama-4-Scout</td>
+  <td>60.18%</td><td>58.19%</td><td>52.05%</td>
+  <td>58.19%</td><td>82.16%</td><td>37.04%</td><td>38.69%</td><td>66.31%</td><td>62.07%</td>
+  <td>57.81%</td>
+</tr>
+<tr>
+  <td>GLM-4.5-V-106BA12B</td>
+  <td>70.09%</td><td>35.79%</td><td>54.51%</td>
+  <td>35.79%</td><td>88.11%</td><td>48.77%</td><td>44.05%</td><td>74.33%</td><td>68.97%</td>
+  <td>57.17%</td>
+</tr>
+<tr>
+  <td>InternVL3.5-38B</td>
+  <td>38.90%</td><td>49.83%</td><td>45.08%</td>
+  <td>49.83%</td><td>46.49%</td><td>41.36%</td><td>31.55%</td><td>33.16%</td><td>62.07%</td>
+  <td>43.29%</td>
+</tr>
+<tr>
+  <td>Gemini-2.5-pro</td>
+  <td>32.84%</td><td>52.84%</td><td>40.98%</td>
+  <td>52.84%</td><td>40.54%</td><td>32.72%</td><td>29.17%</td><td>41.18%</td><td>28.74%</td>
+  <td>40.17%</td>
+</tr>
+<tr>
+  <td>InternVL3.5-8B</td>
+  <td>38.17%</td><td>44.82%</td><td>38.11%</td>
+  <td>44.82%</td><td>35.14%</td><td>41.98%</td><td>30.36%</td><td>36.36%</td><td>56.32%</td>
+  <td>39.98%</td>
+</tr>
+<tr>
+  <td>QwenVL-3-Instruct-8B</td>
+  <td>34.68%</td><td>55.18%</td><td>16.39%</td>
+  <td>55.18%</td><td>20.54%</td><td>18.52%</td><td>27.38%</td><td>25.67%</td><td>77.01%</td>
+  <td>36.21%</td>
+</tr>
+<tr>
+  <td>QwenVL-3-Instruct-32B</td>
+  <td>29.54%</td><td>14.38%</td><td>16.80%</td>
+  <td>14.38%</td><td>11.89%</td><td>18.52%</td><td>25.60%</td><td>22.46%</td><td>74.71%</td>
+  <td>22.52%</td>
+</tr>
+<tr>
+  <td>QwenVL-2.5-Instruct-72B</td>
+  <td>31.01%</td><td>4.68%</td><td>16.39%</td>
+  <td>4.68%</td><td>35.14%</td><td>14.81%</td><td>11.31%</td><td>22.99%</td><td>66.67%</td>
+  <td>20.50%</td>
+</tr>
+</tbody>
+
+  </table>
+</div>
+    </div>
+
+    <div class="table-content" id="ISTA-VQA">
+      <div class="table-placeholder">VQA – ISTA TABLE</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 1. 设置默认初始值
+let selectedDomain = "IAA"; 
+let selectedTask = "VR";
+
+function updateTable() {
+  // 隐藏所有表格内容
+  document.querySelectorAll(".table-content").forEach(div => div.style.display = "none");
+
+  if (selectedDomain && selectedTask) {
+    const id = `${selectedDomain}-${selectedTask}`;
+    const tableDiv = document.getElementById(id);
+    if (tableDiv) tableDiv.style.display = "block";
+  }
+}
+
+// 初始化函数：设置默认按钮状态并显示表格
+function initializeDefaultSelection() {
+  // 设置 Domain 默认按钮高亮
+  const defaultDomainBtn = document.querySelector(`.domain-btn[data-domain="${selectedDomain}"]`);
+  if (defaultDomainBtn) defaultDomainBtn.classList.add("active");
+
+  // 设置 Task 默认按钮高亮
+  const defaultTaskBtn = document.querySelector(`.task-btn[data-task="${selectedTask}"]`);
+  if (defaultTaskBtn) defaultTaskBtn.classList.add("active");
+
+  // 初始显示表格
+  updateTable();
+}
+
+// Domain 按钮逻辑
+document.querySelectorAll(".domain-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".domain-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    selectedDomain = btn.dataset.domain;
+    updateTable();
+  });
+});
+
+// Task 按钮逻辑
+document.querySelectorAll(".task-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".task-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    selectedTask = btn.dataset.task;
+    updateTable();
+  });
+});
+
+// 2. 页面加载完成后执行初始化
+document.addEventListener("DOMContentLoaded", initializeDefaultSelection);
+</script>
+    </div>
+
+    <!-- REWARD -->
+    <div id="reward" class="section">
+      <div class="section-title">UniPercept As Reward</div>
+
+      <!-- ========================= COLLAPSIBLE METRICS TABLE ========================= -->
+
+<style>
+/* 整体容器 */
+.metrics-collapsible-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* 外层卡片 */
+/* .metrics-collapsible-box {
+  width: 90%;
+  max-width: 1300px;
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(12px);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.65);
+} */
+
+/* 折叠按钮 */
+.metrics-collapse-btn {
+  display: block;                 /* 使其可以 margin auto 居中 */
+  margin: 0 auto 10px auto;       /* 居中 */
+  padding: 12px 28px;
+  max-width: 260px;        /* 调整按钮宽度（可改为你想要的数值） */
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 40px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  background: linear-gradient(120deg, #6b8bff, #b38bff);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: all 0.25s ease;
+}
+
+.metrics-collapse-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+}
+
+/* 折叠内容 */
+.collapsible-content {
+  margin-top: 16px;
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+/* 展开动画 */
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(-6px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+/* ====== UniPercept Score 三列强化 ====== */
+.unipercept-strong {
+  font-weight: 700 !important;
+  background: #e8edff !important;    /* 更深的淡蓝底色 */
+  color: #1e2a55 !important;
+}
+
+/* 标题也强化 */
+th.unipercept-strong {
+  background: #dde4ff !important;
+  color: #1b2550 !important;
+  font-weight: 800;
+}
+</style>
+
+
+
+<div class="metrics-collapsible-wrapper">
+  <div class="metrics-collapsible-box">
+
+
+        <div class="interactive-viewer-title">
+  Quantitative Results
+</div>
+
+<!-- ---------------- TABLE START ---------------- -->
+<style>
+/* Wrapper */
+.leaderboard-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+/* Table core */
+.leaderboard-table {
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* Header row */
+.leaderboard-table th {
+  background: #f6f6f8;
+  padding: 10px 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #e2e2e8;
+  text-align: center;
+}
+
+/* --- 修改部分：UniPercept Score 背景颜色加深 --- */
+th.unipercept-header {
+  background: #cbd5ff !important; /* 顶层表头加深 */
+  color: #1a237e;
+  font-weight: 800;
+}
+
+th.unipercept-subheader {
+  background: #dce3ff !important; /* 次级表头稍浅 */
+  color: #1a237e;
+  font-weight: 700;
+}
+
+.unipercept-cell {
+  background: #f4f7ff; /* 单元格底色 */
+}
+
+/* Table content cells */
+.leaderboard-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f0f0f5;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Model name left aligned */
+.leaderboard-table td:first-child {
+  text-align: left;
+}
+
+/* Last row emphasis restored */
+.last-row {
+  background: #eef3ff !important;
+  font-weight: 600 !important;
+}
+
+/* --- 修改部分：学术规范配色风格的字体颜色 --- */
+.top1 {
+  font-weight: 800 !important;
+  color: #003399 !important; /* 深蓝色 */
+}
+
+.top2 {
+  font-weight: 700 !important;
+  color: #3572ef !important; /* 普通蓝色 */
+}
+
+/* Explanation text */
+.leaderboard-explain {
+  font-size: 15px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #444;
+  font-style: italic;
+}
+</style>
+
+<style>
+  /* --- 您提供的基础样式 (保持不变) --- */
+  .body-text {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 1.35;
+    flex: 1;
+  }
+
+  /* --- 新增辅助样式：用于提示条的布局和图标 --- */
+  .interactive-hint-bar {
+    /* 继承 body-text 的基础字体样式，并增加弹性布局对齐 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* 允许在小屏幕自动换行 */
+    gap: 6px 15px; /* 行间距6px，列间距15px */
+    
+    /* 可选：添加一个极淡的背景色以区分提示区域，不需要可删除 */
+    background-color: rgba(0,0,0,0.03);
+    padding: 10px;
+    border-radius: 6px;
+    margin: 20px auto; /* 居中显示 */
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .hint-segment {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap; /* 防止单词内断行 */
+  }
+
+  .hint-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    color: rgba(0, 0, 0, 0.65); /* 图标颜色稍微淡一点，突出文字 */
+    fill: currentColor;
+  }
+  
+  /* 强调动作词汇 */
+  .hint-action {
+    font-weight: 600;
+  }
+</style>
+<div class="body-text interactive-hint-bar">
+  The <span style="color: #003399; font-weight: 800;">dark blue</span> and <span style="color: #3572ef; font-weight: 700;">medium blue</span> 
+  values represent the <strong>best</strong> and <strong>second-best</strong> performance, respectively. 
+  <!-- Higher values indicate better results across all metrics. -->
+    </div>
+
+<div class="leaderboard-wrapper">
+<table class="leaderboard-table" id="scoreTable">
+
+  <thead>
+  <tr>
+    <th rowspan="2">Models</th>
+    <th colspan="2">Preference Score</th>
+    <th rowspan="1">Image Quality</th>
+    <th colspan="2">Image Aesthetics</th>
+    <th colspan="3" class="unipercept-header">UniPercept Score</th>
+  </tr>
+
+  <tr>
+    <th>PickScore</th>
+    <th>HPSv3</th>
+    <th>DeQA</th>
+    <th>LAION-Aes</th>
+    <th>ArtiMuse</th>
+    <th class="unipercept-subheader">IAA</th>
+    <th class="unipercept-subheader">IQA</th>
+    <th class="unipercept-subheader">ISTA</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr>
+    <td>Baseline (FLUX.1-dev)</td>
+    <td>22.46</td>
+    <td>10.71</td>
+    <td>4.32</td>
+    <td>5.77</td>
+    <td>59.02</td>
+    <td class="unipercept-cell">65.18</td>
+    <td class="unipercept-cell">73.59</td>
+    <td class="unipercept-cell">46.64</td>
+  </tr>
+
+  <tr>
+    <td>w/ UniPercept IAA Reward</td>
+    <td>22.47</td>
+    <td>10.09</td>
+    <td>4.09</td>
+    <td class="top1">6.19</td>
+    <td class="top1">67.02</td>
+    <td class="unipercept-cell top1">76.20</td>
+    <td class="unipercept-cell">76.39</td>
+    <td class="unipercept-cell">54.83</td>
+  </tr>
+
+  <tr>
+    <td>w/ UniPercept IQA Reward</td>
+    <td>22.63</td>
+    <td class="top1">11.21</td>
+    <td class="top1">4.37</td>
+    <td>6.02</td>
+    <td>63.64</td>
+    <td class="unipercept-cell">72.16</td>
+    <td class="unipercept-cell top2">76.87</td>
+    <td class="unipercept-cell">52.34</td>
+  </tr>
+
+  <tr>
+    <td>w/ UniPercept ISTA Reward</td>
+    <td class="top1">22.72</td>
+    <td class="top2">11.09</td>
+    <td class="top1">4.37</td>
+    <td class="top2">6.16</td>
+    <td>63.75</td>
+    <td class="unipercept-cell">72.23</td>
+    <td class="unipercept-cell">76.17</td>
+    <td class="unipercept-cell top1">59.61</td>
+  </tr>
+
+  <tr class="last-row">
+    <td>w/ UniPercept All Rewards</td>
+    <td class="top2">22.67</td>
+    <td>10.93</td>
+    <td class="top2">4.33</td>
+    <td class="top1">6.19</td>
+    <td class="top2">65.52</td>
+    <td class="unipercept-cell top2">74.24</td>
+    <td class="unipercept-cell top1">77.04</td>
+    <td class="unipercept-cell top2">59.08</td>
+  </tr>
+
+  </tbody>
+</table>
+</div>
+
+
+<script>
+function highlightTable() {
+  const table = document.querySelector(".leaderboard-table");
+  const rows = table.querySelectorAll("tbody tr");
+  const colCount = rows[0].children.length;
+
+  for (let col = 1; col < colCount; col++) {
+    let values = [];
+
+    rows.forEach(row => {
+      let cell = row.children[col];
+
+      // skip last row (special background)
+      if (row.classList.contains("last-row")) return;
+
+      // skip header-colored UniPercept columns? No — highlight is allowed.
+      let val = parseFloat(cell.innerText);
+      if (!isNaN(val)) values.push({ cell, val });
+    });
+
+    values.sort((a, b) => b.val - a.val);
+
+    if (values[0]) values[0].cell.classList.add("top1");
+    if (values[1]) values[1].cell.classList.add("top2");
+  }
+}
+
+highlightTable();
+</script>
+
+  </div>
+</div>
+
+
+<!-- 展开/折叠脚本 -->
+<script>
+function toggleMetricsTable() {
+  const box = document.getElementById("metricsCollapsible");
+  const btn = document.querySelector(".metrics-collapse-btn");
+
+  if (box.style.display === "none" || box.style.display === "") {
+    box.style.display = "block";
+    btn.innerHTML = "Quantitative Comparison ▲";
+  } else {
+    box.style.display = "none";
+    btn.innerHTML = "Quantitative Comparison ▼";
+  }
+}
+</script>
+
+      <!-- ===================== Reward Visualization (Full Block) ===================== -->
+<style>
+/* ===================== Overall Layout ===================== */
+.reward-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(5, 1fr); /* prompt 稍微更宽 */
+  gap: 18px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* ===================== Header Capsule Buttons ===================== */
+.reward-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 16px;
+
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+
+  background: #ffffff;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+
+  color: #1c1f25;
+}
+
+/* Prompt header */
+.reward-header.prompt-head {
+  background: linear-gradient(135deg, #ff7d9b, #ff4d75);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(255,80,120,0.25);
+}
+
+/* Baseline */
+.reward-header.baseline {
+  background: #ffffff;
+}
+
+/* IAA → Red Theme */
+.reward-header.iaa {
+  background: #ffe6ec;
+  color: #d9366f;
+  border-color: #f5b8c8;
+}
+
+/* IQA → Blue Theme */
+.reward-header.iqa {
+  background: #e7f1ff;
+  color: #2466d1;
+  border-color: #b7d3ff;
+}
+
+/* ISTA → Purple Theme */
+.reward-header.ista {
+  background: #efe6ff;
+  color: #7e3ce0;
+  border-color: #d5c2ff;
+}
+
+/* All Reward → RGB Gradient */
+.reward-header.all-reward {
+  background: linear-gradient(90deg, #ff6f91, #5a98ff, #c07bff);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(160,120,255,0.25);
+}
+
+/* ===================== Row Layout ===================== */
+.reward-row {
+  display: contents;
+}
+
+/* ===================== Prompt Cell ===================== */
+.reward-prompt {
+  padding: 20px 18px;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 14px;
+
+  color: #1d2129;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.65;
+  letter-spacing: 0.2px;
+
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+
+  min-height: 170px; /* 更高，适配长 prompt */
+  white-space: pre-line;
+}
+
+/* ===================== Image Thumbnails ===================== */
+.reward-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  cursor: pointer;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover Zoom Effect */
+.reward-img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  z-index: 10;
+}
+
+/* ===================== Responsive Layout ===================== */
+@media (max-width: 1100px) {
+  .reward-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reward-header {
+    display: none;
+  }
+
+  .reward-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reward-prompt {
+    grid-column: span 2;
+  }
+}
+</style>
+
+
+
+<div class="interactive-viewer-title">
+  Qualitative Results
+</div>
+
+<!-- ===================== Reward Visualization HTML ===================== -->
+<div class="reward-grid">
+
+  <!-- Header Row -->
+  <div class="reward-header prompt-head">Prompt</div>
+<div class="reward-header baseline">Baseline<br>(FLUX.1-dev)</div>
+<div class="reward-header iaa">w / UniPercept<br>IAA Reward</div>
+<div class="reward-header iqa">w / UniPercept<br>IQA Reward</div>
+<div class="reward-header ista">w / UniPercept<br>ISTA Reward</div>
+<div class="reward-header all-reward">w / UniPercept<br>All Rewards</div>
+
+  <!-- ================= ROW 1 ================= -->
+  <div class="reward-row">
+    <div class="reward-prompt">
+        A modern office space featuring a sleek desk with a computer set up, including a monitor, keyboard, and mouse. Beside the computer, there's a printer with a stack of paper next to it. An ergonomic office chair is positioned in front of the desk, ready for someone to sit down and start working.
+    </div>
+    <img src="figures/reward/comparison/1-room/baseline_00367_COCOval2014000000377183.png" class="reward-img">
+    <img src="figures/reward/comparison/1-room/w_iaa_reward_00367_COCOval2014000000377183.png" class="reward-img">
+    <img src="figures/reward/comparison/1-room/w_iqa_reward_00367_COCOval2014000000377183.png" class="reward-img">
+    <img src="figures/reward/comparison/1-room/w_ista_reward_00367_COCOval2014000000377183.png" class="reward-img">
+    <img src="figures/reward/comparison/1-room/w_all_reward_00367_COCOval2014000000377183.png" class="reward-img">
+  </div>
+
+  <!-- ================= ROW 2 ================= -->
+  <div class="reward-row">
+    <div class="reward-prompt">
+A young child with brown hair, focused intently, sits at a wooden table scattered with colorful crayons and paper. In their small hand is a bright red pencil, with which they are diligently drawing a vibrant blue flower that's taking shape on the white sheet before them. Sunlight filters through a nearby window, casting a warm glow on the child's artwork.
+    </div>
+    <img src="figures/reward/comparison/2-children/baseline_01040_whoops22.png" class="reward-img">
+    <img src="figures/reward/comparison/2-children/w_iaa_reward_01040_whoops22.png" class="reward-img">
+    <img src="figures/reward/comparison/2-children/w_iqa_reward_01040_whoops22.png" class="reward-img">
+    <img src="figures/reward/comparison/2-children/w_ista_reward_01040_whoops22.png" class="reward-img">
+    <img src="figures/reward/comparison/2-children/w_all_reward_01040_whoops22.png" class="reward-img">
+  </div>
+
+  <!-- ================= ROW 3 ================= -->
+  <div class="reward-row">
+    <div class="reward-prompt">
+       A striking black bird with glossy feathers sits atop the vibrant orange petals of a Bird of Paradise flower. The unique flower is positioned in the midst of an arid desert landscape, with various cacti and sparse vegetation dotting the sandy ground. In the background, the sun casts a warm glow on the distant rolling dunes.
+
+    </div>
+    <img src="figures/reward/comparison/3-bird/baseline_01062_whoops7.png" class="reward-img">
+    <img src="figures/reward/comparison/3-bird/w_iaa_reward_01062_whoops7.png" class="reward-img">
+    <img src="figures/reward/comparison/3-bird/w_iqa_reward_01062_whoops7.png" class="reward-img">
+    <img src="figures/reward/comparison/3-bird/w_ista_reward_01062_whoops7.png" class="reward-img">
+    <img src="figures/reward/comparison/3-bird/w_all_reward_01062_whoops7.png" class="reward-img">
+  </div>
+
+  <!-- ================= ROW 4 ================= -->
+  <div class="reward-row">
+    <div class="reward-prompt">
+A vibrant yellow 2017 Porsche 911 is captured in motion, navigating a winding mountain road with its sleek body hugging the curve. The sports car's headlights are piercing through the overcast weather, illuminating the path ahead. In the background, a lush green valley stretches out beneath a sky filled with grey clouds, hinting at the vast expanse beyond the road's edge.
+    </div>
+    <img src="figures/reward/comparison/4-car/baseline_00703_partiprompts208.png" class="reward-img">
+    <img src="figures/reward/comparison/4-car/w_iaa_reward_00703_partiprompts208.png" class="reward-img">
+    <img src="figures/reward/comparison/4-car/w_iqa_reward_00703_partiprompts208.png" class="reward-img">
+    <img src="figures/reward/comparison/4-car/w_ista_reward_00703_partiprompts208.png" class="reward-img">
+    <img src="figures/reward/comparison/4-car/w_all_reward_00703_partiprompts208.png" class="reward-img">
+  </div>
+
+</div>
+
+
+    </div>
+
+    <!-- RESULTS -->
+    <div id="metrics" class="section">
+  <div class="section-title">UniPercept As Metrics</div>
+
+   
+<style>
+  /* --- 您提供的基础样式 (保持不变) --- */
+  .body-text {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 1.35;
+    flex: 1;
+  }
+
+  /* --- 修改后的样式：增加宽度并保持对齐 --- */
+  .interactive-hint-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px 15px;
+    
+    background-color: rgba(0,0,0,0.03);
+    padding: 12px 20px; /* 略微增加左右内边距提升呼吸感 */
+    border-radius: 8px;
+    
+    /* 核心修改点： */
+    margin: 15px auto;    /* 稍微减小顶距，增强与标题的关联感 */
+    width: 95%;           /* 在小屏幕上占据大部分宽度 */
+    max-width: 1100px;    /* 从 800px 增加到 1100px，以匹配下方图表宽度 */
+    
+    text-align: center;
+    box-sizing: border-box; /* 确保 padding 不会撑破容器 */
+  }
+
+  .hint-segment {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap; /* 防止单词内断行 */
+  }
+
+  .hint-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    color: rgba(0, 0, 0, 0.65); /* 图标颜色稍微淡一点，突出文字 */
+    fill: currentColor;
+  }
+  
+  /* 强调动作词汇 */
+  .hint-action {
+    font-weight: 600;
+  }
+</style>
+  <div class="body-text interactive-hint-bar">
+      Visualization of score distributions for selected <strong>models,</strong> <strong>benchmarks,</strong> and <strong>Unipercept-metrics</strong> on generated images. The x-axis denotes the score of the corresponding metric while the y-axis represents the density.
+    </div>
+
+  <!-- ====================== METRICS WRAPPER ====================== -->
+  <div class="metrics-wrapper">
+
+    <!-- ======= 选择器区域：胶囊风格 ======= -->
+    <div class="metrics-selector">
+
+      <!-- Models -->
+      <div class="metrics-group">
+        <div class="metrics-group-title">Model</div>
+        <div class="pill-group">
+          <label class="pill"><input type="checkbox" value="bagel" class="metrics-model" checked>BAGEL</label>
+          <label class="pill"><input type="checkbox" value="dimoo" class="metrics-model" checked>Lumina-DiMOO</label>
+          <label class="pill"><input type="checkbox" value="omnigen1" class="metrics-model" checked>OmniGen</label>
+          <label class="pill"><input type="checkbox" value="omnigen2" class="metrics-model" checked>OmniGen2</label>
+          <label class="pill"><input type="checkbox" value="sana" class="metrics-model" checked>SANA-1.6B</label>
+          <label class="pill"><input type="checkbox" value="fluxdev" class="metrics-model" checked>FLUX.1-dev</label>
+          <label class="pill"><input type="checkbox" value="gptimage" class="metrics-model" checked>GPT-Image-1</label>
+          <label class="pill"><input type="checkbox" value="banana" class="metrics-model" checked>Nano Banana</label>
+          
+        </div>
+      </div>
+
+      <!-- Dataset -->
+      <div class="metrics-group">
+        <div class="metrics-group-title">benchmark</div>
+        <div class="pill-group">
+          <label class="pill"><input type="checkbox" value="dpg" class="metrics-dataset" checked>DPG</label>
+          <label class="pill"><input type="checkbox" value="geneval" class="metrics-dataset" checked>GenEval</label>
+        </div>
+      </div>
+
+      <!-- Metric -->
+      <div class="metrics-group">
+        <div class="metrics-group-title">Unipercept-Metrics</div>
+        <div class="pill-group">
+          <label class="pill pill-iaa"><input type="checkbox" value="IAA" class="metrics-metric" checked>IAA</label>
+          <label class="pill pill-iqa"><input type="checkbox" value="IQA" class="metrics-metric" checked>IQA</label>
+          <label class="pill pill-ista"><input type="checkbox" value="ISTA" class="metrics-metric" checked>ISTA</label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== KDE Chart ========== -->
+    <div class="metrics-chart-box">
+      <canvas id="metricsChart"></canvas>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========================== STYLE ========================== -->
+<style>
+/* Wrapper */
+.metrics-wrapper {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  margin-top: 25px;
+}
+
+/* Selector layout */
+.metrics-selector {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 22px;
+}
+
+/* Group title */
+.metrics-group-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+/* Pills group */
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Pills */
+.pill {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f4f6fa;
+  border: 1px solid rgba(0,0,0,0.12);
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pill input {
+  transform: scale(1.1);
+}
+
+/* Hover */
+.pill:hover {
+  background: #eceff3;
+}
+
+/* Domain-themed color pills */
+.pill-iaa { border: 1px solid #ff6b8a55; }
+.pill-iqa { border: 1px solid #4d95ff55; }
+.pill-ista { border: 1px solid #b06bff55; }
+
+/* Chart box */
+.metrics-chart-box {
+  margin-top: 32px;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.10);
+}
+
+#metricsChart {
+  width: 100%;
+  height: 420px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .metrics-selector {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<!-- ========================== JS ========================== -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="figures/metrics/metrics_data.js"></script>
+
+<script>
+/* Labels */
+const MODEL_LABELS = {
+  bagel:"BAGEL",
+  dimoo:"Lumina-DiMOO",
+  omnigen1:"OmniGen",
+  omnigen2:"OmniGen2",
+  sana:"SANA-1.6B",
+  fluxdev:"FLUX.1-dev",
+  gptimage: "GPT-Image-1",
+  banana:"Nano Banana"
+};
+
+const DATASET_LABELS = {
+  dpg:"DPG",
+  geneval:"GenEval"
+};
+
+const METRIC_LABELS = {
+  IAA:"IAA",
+  IQA:"IQA",
+  ISTA:"ISTA"
+};
+
+/* KDE */
+function kde(scores, bandwidth=3) {
+  const xs = [...Array(101).keys()];
+  const ys = xs.map(x => {
+    let s = 0;
+    for (let v of scores) s += Math.exp(-0.5 * ((x - v) / bandwidth) ** 2);
+    return s;
+  });
+  const maxY = Math.max(...ys);
+  return { xs, ys: ys.map(v => v/maxY) };
+}
+
+/* Init Chart */
+const ctx = document.getElementById("metricsChart");
+let chart = new Chart(ctx, {
+  type: "line",
+  data: { labels: [], datasets: [] },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    elements: { line: { tension:0.35, borderWidth:2 }, point:{ radius:0 } },
+    scales: {
+      x: { title:{ display:true, text:"Score" } },
+      y: { title:{ display:true, text:"Density (Normalized)" } }
+    },
+    plugins: { legend:{ position:"bottom" } }
+  }
+});
+
+/* Get selections */
+function getChecked(selector) {
+  return [...document.querySelectorAll(selector+':checked')].map(e=>e.value);
+}
+
+/* Update chart */
+function updateChart(){
+  const models = getChecked(".metrics-model");
+  const datasets = getChecked(".metrics-dataset");
+  const metrics = getChecked(".metrics-metric");
+
+  const filtered = (window.metricsData||[]).filter(item =>
+    models.includes(item.model) &&
+    datasets.includes(item.dataset) &&
+    metrics.includes(item.metric)
+  );
+
+  let sets = [];
+  const labels = [...Array(101).keys()];
+
+  filtered.forEach((item, idx) => {
+    const { ys } = kde(item.scores, 3);
+    sets.push({
+      label: `${MODEL_LABELS[item.model]} • ${DATASET_LABELS[item.dataset]} • ${METRIC_LABELS[item.metric]}`,
+      data: ys,
+      borderColor: `hsl(${idx*50},70%,40%)`,
+      backgroundColor:"transparent"
+    });
+  });
+
+  chart.data.labels = labels;
+  chart.data.datasets = sets;
+  chart.update();
+}
+
+/* Attach listener */
+// document.querySelectorAll(".metrics-model, .metrics-dataset, .metrics-metric")
+//   .forEach(el => el.addEventListener("change", updateChart));
+
+/* 1. 修改：新增设置默认选中的逻辑 */
+/* --- 修改部分：确保仅选中每一类的第一个选项 --- */
+function setInitialSelections() {
+  const categories = [".metrics-model", ".metrics-dataset", ".metrics-metric"];
+  
+  categories.forEach(selector => {
+    // 1. 获取该类别下所有的选项
+    const allOptions = document.querySelectorAll(selector);
+    
+    // 2. 首先取消该类别下所有选项的勾选状态
+    allOptions.forEach(el => {
+      el.checked = false;
+    });
+    
+    // 3. 仅将第一个选项设为选中
+    if (allOptions.length > 0) {
+      allOptions[0].checked = true;
+    }
+  });
+}
+
+// 执行初始化选中逻辑
+setInitialSelections();
+
+/* Attach listener (保持不变) */
+document.querySelectorAll(".metrics-model, .metrics-dataset, .metrics-metric")
+  .forEach(el => el.addEventListener("change", updateChart));
+
+/* 初次渲染图表 (此时 getChecked 只会获取到被选中的那一个) */
+updateChart();
+</script>
+
+    <!-- RESULTS -->
+    <div id="results" class="section">
+      <div class="section-title">Unified Results</div>
+
+      <style>
+  /* --- 您提供的基础样式 (保持不变) --- */
+  .body-text {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 1.35;
+    flex: 1;
+  }
+
+  /* --- 新增辅助样式：用于提示条的布局和图标 --- */
+  .interactive-hint-bar {
+    /* 继承 body-text 的基础字体样式，并增加弹性布局对齐 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* 允许在小屏幕自动换行 */
+    gap: 6px 15px; /* 行间距6px，列间距15px */
+    
+    /* 可选：添加一个极淡的背景色以区分提示区域，不需要可删除 */
+    background-color: rgba(0,0,0,0.03);
+    padding: 10px;
+    border-radius: 6px;
+    margin: 20px auto; /* 居中显示 */
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .hint-segment {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap; /* 防止单词内断行 */
+  }
+
+  .hint-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    color: rgba(0, 0, 0, 0.65); /* 图标颜色稍微淡一点，突出文字 */
+    fill: currentColor;
+  }
+  
+  /* 强调动作词汇 */
+  .hint-action {
+    font-weight: 600;
+  }
+</style>
+       <div class="body-text interactive-hint-bar">
+    UniPercept generates a comprehensive perceptual profile for each image. 
+    <span class="hint-segment">
+    <svg class="hint-icon" viewBox="0 0 24 24">
+      <path d="M9,11.24V7.5C9,6.12 10.12,5 11.5,5C12.88,5 14,6.12 14,7.5V11.24C15.53,11.6 16.83,12.53 17.6,13.8C18.38,15.07 18.54,16.64 18.04,18.06L16.24,23H5.76L3.96,18.06C3.46,16.64 3.62,15.07 4.4,13.8C5.17,12.53 6.47,11.6 8,11.24V11.24V11.24Z" />
+    </svg>
+    <span><span class="hint-action">Click</span> the figure below for a detailed exploration.</span>
+  </span>
+  </div>
+      <!-- ================== Unified Results: Interactive Image Analysis ================== -->
+
+<style>
+.unified-results-container {
+  margin-top: 25px;
+  font-family: "Inter", sans-serif;
+}
+
+/* 顶部说明文字 */
+.results-hint {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: #444;
+  opacity: 0.9;
+}
+
+/* 图像画廊 */
+.results-gallery {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.result-thumb {
+  width: 230px;
+  height: 160px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  transition: 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+/* 轻微提示标签 */
+.result-thumb::after {
+  content: "Click to analyze";
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+}
+
+.result-thumb:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.result-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: rgba(255,255,255,0.3);
+}
+
+/* 展开分析区域 */
+.analysis-panel {
+  width: 90%;
+  max-width: 950px;
+  margin: 35px auto 0 auto;
+  padding: 28px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border: 1px solid rgba(255,255,255,0.65);
+
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  display: none;
+
+  /* 居中图片+文字竖向排列 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 显示状态 */
+.analysis-panel.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+/* 居中的图片 */
+.analysis-image {
+  width: 260px;
+  max-width: 100%;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.2);
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+/* 打字机文本整体容器，限制宽度保持论文风 */
+#analysis-text {
+  width: 100%;
+  max-width: 880px;
+}
+
+/* 评分条 */
+.score-bar {
+  width: 100%;
+  max-width: 880px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+.score-label {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.score-track {
+  width: 100%;
+  height: 14px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.08);
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: 10px;
+  width: 0;
+  transition: width 0.6s ease;
+}
+
+/* 颜色 */
+.score-IAA   { background: linear-gradient(90deg,#ff6b8a,#ff8fb3); }
+.score-IQA   { background: linear-gradient(90deg,#4d95ff,#7ab0ff); }
+.score-ISTA  { background: linear-gradient(90deg,#b06bff,#d6a9ff); }
+
+/* 标题色 */
+.domain-section-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-top: 28px;
+  margin-bottom: 10px;
+}
+
+.domain-section-title span {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.IAA-color  { color: #d94a6a; }
+.IQA-color  { color: #3d73d9; }
+.ISTA-color { color: #9e56ff; }
+
+/* 小节标题 */
+.sub-header {
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 16px;
+  color: #333;
+}
+
+/* 列表文字 */
+.analysis-panel ul {
+  margin-top: 6px;
+  padding-left: 18px;
+}
+
+.analysis-panel li {
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: #333;
+}
+
+/* 打字机效果的小闪烁光标（可选） */
+.type-cursor {
+  display: inline-block;
+  width: 8px;
+  margin-left: 2px;
+  background: #333;
+  animation: blink 0.9s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+</style>
+
+<div class="unified-results-container">
+
+  <!-- 图像列表 -->
+  <div class="results-gallery">
+    <div class="result-thumb" onclick="openAnalysis(0)">
+      <img src="figures/unified_results/1.png">
+    </div>
+    <div class="result-thumb" onclick="openAnalysis(1)">
+      <img src="figures/unified_results/2.png">
+    </div>
+    <div class="result-thumb" onclick="openAnalysis(2)">
+      <img src="figures/unified_results/3.png">
+    </div>
+  </div>
+
+  <!-- 展开的分析结果 -->
+  <div id="analysis-panel" class="analysis-panel">
+
+    <!-- 居中图像 -->
+    <img id="analysis-image" class="analysis-image" src="figures/unified_results/1.png">
+
+    <!-- 评分条 -->
+    <div class="score-bar">
+      <div class="score-label IAA-color">
+        IAA Score: <span id="s-IAA">29</span> / 100
+      </div>
+      <div class="score-track">
+        <div id="bar-IAA" class="score-fill score-IAA"></div>
+      </div>
+    </div>
+
+    <div class="score-bar">
+      <div class="score-label IQA-color">
+        IQA Score: <span id="s-IQA">35</span> / 100
+      </div>
+      <div class="score-track">
+        <div id="bar-IQA" class="score-fill score-IQA"></div>
+      </div>
+    </div>
+
+    <div class="score-bar">
+      <div class="score-label ISTA-color">
+        ISTA Score: <span id="s-ISTA">46</span> / 100
+      </div>
+      <div class="score-track">
+        <div id="bar-ISTA" class="score-fill score-ISTA"></div>
+      </div>
+    </div>
+
+    <!-- 打字机文本容器 -->
+    <div id="analysis-text"></div>
+
+  </div>
+</div>
+
+<script>
+// 三个示例的分数（占位）
+const exampleScores = [
+  { iaa: 29, iqa: 35, ista: 46 },
+  { iaa: 87, iqa: 75, ista: 56 },
+  { iaa: 75, iqa: 81, ista: 82 }
+];
+
+// 统一的分析文本模板（占位内容）
+const analysisHTMLTemplate = `
+  <div class="domain-section-title IAA-color">
+    Image <span class="IAA-color">Aesthetics</span> Assessment (IAA)
+  </div>
+
+  <div class="sub-header">Composition &amp; Design</div>
+  <ul>
+    <li>The composition is nonexistent, with a completely blurred and indistinct subject ...</li>
+    <li>There is no balance or rhythm to speak of. The elements are randomly scattered ...</li>
+  </ul>
+
+  <div class="sub-header">Technical Execution</div>
+  <ul>
+    <li>The image exhibits catastrophic technical execution.</li>
+    <li>Every possible mistake is present, with extreme blurriness rendering all details invisible.</li>
+    <li>The focus is nonexistent, resulting in a complete lack of sharpnessness.</li>
+  </ul>
+
+  <div class="sub-header">Comprehensive Evaluation</div>
+  <ul>
+    <li>The image suffers from extreme blurriness, rendering any aesthetic evaluation impossible.</li>
+    <li>The lack of focus eliminates any potential visual impact, technical merit, or depth ...</li>
+    <li>In summary, the image's total absence of visual coherence results in a zero aesthetic merit.</li>
+  </ul>
+
+  <div class="domain-section-title IQA-color">
+    Image <span class="IQA-color">Quality</span> Assessment (IQA)
+  </div>
+
+  <div class="sub-header">Distortion Location</div>
+  <ul>
+    <li>The entire scene, including the pergola, lanterns, and foliage, is out of focus ...</li>
+    <li>The image fails to convey any meaningful content due to its total lack of clarity.</li>
+  </ul>
+
+  <div class="sub-header">Distortion Severity</div>
+  <ul>
+    <li>The image suffers from extreme blurriness ...</li>
+    <li>The final distortion severity is the maximum imaginable.</li>
+  </ul>
+
+  <div class="sub-header">Overall Quality</div>
+  <ul>
+    <li>The image is severely out of focus, rendering all elements indistinct ...</li>
+    <li>In summary, the image quality is catastrophic, with zero merit due to blurriness.</li>
+  </ul>
+
+  <div class="domain-section-title ISTA-color">
+    Image <span class="ISTA-color">Structure &amp; Texture</span> Assessment (ISTA)
+  </div>
+
+  <div class="sub-header">Scene Decomposition Principles</div>
+  <ul>
+    <li>Scene Type: Blurred Composite Scene</li>
+    <li>Component: Pergola / Lanterns</li>
+  </ul>
+
+  <div class="sub-header">Material Representation</div>
+  <ul>
+    <li>[Material Class: Glass] [Surface Properties: Glossy]</li>
+    <li>[Material Class: Foliage] [Surface Properties: Matte]</li>
+  </ul>
+`;
+
+// 三张图像路径
+const exampleImages = [
+  "figures/unified_results/1.png",
+  "figures/unified_results/2.png",
+  "figures/unified_results/3.png"
+];
+
+// 三个分析文档（分别对应三张图）
+const analysisDocs = [
+  `<div class="domain-section-title IAA-color">
+  Image <span class="IAA-color">Aesthetics</span> Assessment (IAA)
+</div>
+
+<div class="sub-header">Composition &amp; Design</div>
+<ul>
+  <li>The composition is nonexistent, with a completely blurred and indistinct subject ...</li>
+  <li>There is no balance or rhythm to speak of. The elements are randomly scattered ...</li>
+</ul>
+
+<div class="sub-header">Technical Execution</div>
+<ul>
+  <li>The image exhibits catastrophic technical execution.</li>
+  <li>Every possible mistake is present, with extreme blurriness rendering all details invisible.</li>
+  <li>The focus is nonexistent, resulting in a complete lack of sharpnessness.</li>
+  <li>...</li>
+</ul>
+
+<div class="sub-header">Comprehensive Evaluation</div>
+<ul>
+  <li>The image suffers from extreme blurriness, rendering any aesthetic evaluation impossible.</li>
+  <li>The lack of focus eliminates any potential visual impact, technical merit, or depth. Every element, from the pergola to the lanterns, is indistinct, failing to convey any meaningful ...</li>
+  <li>In summary, the image's total absence of visual coherence results in a zero aesthetic merit.</li>
+</ul>
+
+<div class="domain-section-title IQA-color">
+  Image <span class="IQA-color">Quality</span> Assessment (IQA)
+</div>
+
+<div class="sub-header">Distortion Location</div>
+<ul>
+  <li>The entire scene, including the pergola, lanterns, and background foliage, is out of focus, resulting in a complete loss of sharpnessness. This blurring affects every element uniformly, making it impossible to identify ...</li>
+  <li>The image fails to convey any meaningful content due to its total lack of clarity.</li>
+</ul>
+
+<div class="sub-header">Distortion Severity</div>
+<ul>
+  <li>The image suffers from extreme blurriness.</li>
+  <li>This catastrophic blurring negates any possible evaluation of other distortion types, as nothing is visible.</li>
+  <li>The final distortion severity is the maximum imaginable.</li>
+  <li>...</li>
+</ul>
+
+<div class="sub-header">Overall Quality</div>
+<ul>
+  <li>The image is severely out of focus, rendering all elements indistinct and lacking any discernible detail.</li>
+  <li>The lack of sharpnessness, exposure, and any visible content results in a complete failure in image quality. This extreme blurriness negates any possible merit, making it impossible to evaluate any positive attributes.</li>
+  <li>In summary, the image quality is catastrophic, with zero merit due to total blurriness.</li>
+</ul>
+
+<div class="domain-section-title ISTA-color">
+  Image <span class="ISTA-color">Structure &amp; Texture</span> Assessment (ISTA)
+</div>
+
+<div class="sub-header">Scene Decomposition Principles</div>
+<ul>
+  <li>Scene Type: Blurred Composite Scene</li>
+  <li>Scene Name: Garden with pergola and hanging lights</li>
+</ul>
+
+<div class="sub-header">Material Representation</div>
+<ul>
+  <li>
+    Componet: Pergola — [Base Morphology: Lined] [Arrangement: Horizontal]  
+    [Material Class: Glass] [Surface Properties: Glossy]  
+    [Volumetric Form: Sphere]
+  </li>
+  <li>
+    Componet: Background Foliage — [Base Morphology: Matted] [Arrangement: Layered]  
+    [Material Class: Foliage] [Surface Properties: Matte]  
+    [Volumetric Form: Naturalistic]
+  </li>
+  <li>
+    Componet: Hanging Lights — [Base Morphology: Smooth] [Arrangement: Clustered]  
+    [Material Class: Glass] [Surface Properties: Glossy]  
+    [Volumetric Form: Sphere]
+  </li>
+  <li>...</li>
+</ul>`,
+
+  `<div class="domain-section-title IAA-color">
+  Image <span class="IAA-color">Aesthetics</span> Assessment (IAA)
+</div>
+
+<div class="sub-header">Originality &amp; Creativity</div>
+<ul>
+  <li>The image depicts a well-preserved historical house with a straightforward and classic presentation.</li>
+  <li>While the composition and clarity are excellent, the photograph adheres closely to traditional documentation styles, lacking experimental or imaginative elements.</li>
+</ul>
+
+<div class="sub-header">Emotion &amp; Viewer Response</div>
+<ul>
+  <li>The image evokes a strong sense of nostalgia and admiration for historical architecture, effectively capturing ...</li>
+  <li>The well-preserved colonial house and lush green create a tranquil, inviting atmosphere, likely sparking curiosity and appreciation for historical preservation. While the composition is perfect and visually pleasing, it may ...</li>
+  <li>...</li>
+</ul>
+
+<div class="sub-header">Comprehensive Evaluation</div>
+<ul>
+  <li>The image showcases a well-preserved historical house with strong visual impact due to its symmetrical ...</li>
+  <li>Overall, the image excels in historical representation but slightly lacks dynamic engagement. The aesthetic merit is strong, reflecting both historical and visual excellence.</li>
+</ul>
+
+<div class="domain-section-title IQA-color">
+  Image <span class="IQA-color">Quality</span> Assessment (IQA)
+</div>
+
+<div class="sub-header">Distortion Type / Location / Severity</div>
+<ul>
+  <li>There is no distortion in the image.</li>
+  <li>...</li>
+</ul>
+
+<div class="sub-header">Overall Quality</div>
+<ul>
+  <li>The image showcases a well-preserved historical building with excellent clarity and vibrant colors, capturing the architectural details and surrounding green effectively.</li>
+  <li>The composition is balanced, with well-lit, sharp focus, and excellent exposure.</li>
+  <li>The cobblestone path and lush trees enhance the scene's authenticity.</li>
+  <li>There are no visible flaws, indicating perfect sharpnessness and color accuracy.</li>
+  <li>This image excels in every aspect, achieving perfection.</li>
+  <li>Overall, this is a flawless, high-quality photograph.</li>
+</ul>
+
+<div class="domain-section-title ISTA-color">
+  Image <span class="ISTA-color">Structure &amp; Texture</span> Assessment (ISTA)
+</div>
+
+<div class="sub-header">Scene Decomposition Principles</div>
+<ul>
+  <li>Scene Type: Composite Scene</li>
+  <li>Scene Name: Historic house with surrounding environment</li>
+</ul>
+
+<div class="sub-header">Material Representation</div>
+<ul>
+  <li>
+    Componet: House —  
+    [Base Morphology: Lined, Smooth] [Arrangement: Horizontal]  
+    [Material Class: Wood] [Surface Properties: Matte]  
+    [Planar Contour: Rectangle] [Volumetric Form: Cuboid]  
+    [Semantic Perception: Style Type: Colonial Architecture]
+  </li>
+  <li>
+    Componet: Roof —  
+    [Base Morphology: Tiled] [Arrangement: Layered]  
+    [Material Class: Tile] [Surface Properties: Matte]  
+    [Planar Contour: Rectangle]  
+    [Semantic Perception: Style Type: Traditional]
+  </li>
+  <li>
+    Componet: Chimneys —  
+    [Base Morphology: Brick] [Arrangement: Vertical]  
+    [Material Class: Brick] [Surface Properties: Matte]  
+    [Planar Contour: Rectangle] [Volumetric Form: Cuboid]  
+    [Semantic Perception: Style Type: Traditional]
+  </li>
+  <li>...</li>
+</ul>`,
+
+  `<div class="domain-section-title IAA-color">
+  Image <span class="IAA-color">Aesthetics</span> Assessment (IAA)
+</div>
+
+<div class="sub-header">Visual Elements &amp; Structure</div>
+<ul>
+  <li>The image excels in visual elements and structure, showcasing a harmonious blend of vibrant colors ...</li>
+  <li>The lush green of the jungle contrasts beautifully with the bright orange background, enhancing visual impact. The composition is meticulously balanced, with dynamic focal points like the pyramid and characters, creating a cohesive and engaging scene.</li>
+</ul>
+
+<div class="sub-header">Theme &amp; Communication</div>
+<ul>
+  <li>The image masterfully communicates the theme of a jungle tomb raid through its vivid and intricate LEGO ...</li>
+  <li>Every element, from the pyramid to the characters and animals, is meticulously crafted to evoke a sense of adventure and danger. The narrative is clear and engaging, effectively capturing the essence of Indiana Jones.</li>
+</ul>
+
+<div class="sub-header">Overall Gestalt</div>
+<ul>
+  <li>The image showcases a masterpiece of LEGO artistry, seamlessly blending every element to perfection.</li>
+  <li>The overall gestalt is nothing short of perfection, with every detail meticulously crafted to create a cohesive, enchanting jungle scene. The vibrant colors, intricate details, and harmonious composition evoke a sense ...</li>
+  <li>...</li>
+</ul>
+
+<div class="domain-section-title IQA-color">
+  Image <span class="IQA-color">Quality</span> Assessment (IQA)
+</div>
+
+<div class="sub-header">Distortion Type / Location / Severity</div>
+<ul>
+  <li>There is no distortion in the image.</li>
+  <li>...</li>
+</ul>
+
+<div class="sub-header">Overall Quality</div>
+<ul>
+  <li>The image is sharp and well-composed, showcasing a detailed LEGO jungle scene without any distortion.</li>
+  <li>The vibrant colors and intricate details are intact, with no signs of blurring, overexposure, or compression artifacts. The scene's perfection is evident in its clarity and balance. There are no visual flaws.</li>
+  <li>The lighting and composition are flawless, enhancing the intricate details and depth.</li>
+  <li>There are no visible flaws, making it a flawless representation.</li>
+  <li>This image excels beyond perfection, meriting a perfect score. In summary, the image is flawless in every aspect, showcasing impeccable quality.</li>
+</ul>
+
+<div class="domain-section-title ISTA-color">
+  Image <span class="ISTA-color">Structure &amp; Texture</span> Assessment (ISTA)
+</div>
+
+<div class="sub-header">Scene Decomposition Principles</div>
+<ul>
+  <li>Scene Type: Composite Scene</li>
+  <li>Scene Name: Lego Jungle Temple</li>
+</ul>
+
+<div class="sub-header">Material Representation</div>
+<ul>
+  <li>
+    Componet: Temple Structure —  
+    [Base Morphology: Blocky, Grid] [Arrangement: Layered]  
+    [Material Class: Plastic] [Surface Properties: Matte]  
+    [Planar Contour: Rectangle] [Volumetric Form: Cuboid]
+  </li>
+  <li>
+    Componet: Palm Trees —  
+    [Base Morphology: Fibrous, Frilly] [Arrangement: Vertical]  
+    [Material Class: Plastic] [Surface Properties: Matte]  
+    [Volumetric Form: Cylinder]
+  </li>
+  <li>
+    Componet: Flora —  
+    [Base Morphology: Matted, Frilly] [Arrangement: Clustered]  
+    [Material Class: Plastic] [Surface Properties: Matte]
+  </li>
+  <li>
+    Componet: Figures —  
+    [Base Morphology: Blocky] [Arrangement: Clustered]  
+    [Material Class: Plastic] [Surface Properties: Matte]
+  </li>
+  <li>...</li>
+</ul>`
+];
+
+/**
+ * 打字机效果：以一定速度逐字符写入 HTML 字符串
+ */
+function typeWriter(targetEl, htmlString, totalDuration = 5000) {
+  targetEl.innerHTML = "";  // 清空内容
+  let i = 0;
+  const totalLength = htmlString.length;
+
+  // 计算每个字符应该的间隔时间（毫秒）
+  const interval = totalDuration / totalLength;
+
+  function type() {
+    if (i <= totalLength) {
+      targetEl.innerHTML = htmlString.slice(0, i) +
+        '<span class="type-cursor"></span>';
+      i++;
+      setTimeout(type, interval);
+    } else {
+      // 完成后移除光标
+      targetEl.innerHTML = htmlString;
+    }
+  }
+
+  type();
+}
+
+function openAnalysis(index) {
+  const panel   = document.getElementById("analysis-panel");
+  const img     = document.getElementById("analysis-image");
+  const textBox = document.getElementById("analysis-text");
+
+  // 设置点击对应图像
+  img.src = exampleImages[index];
+
+  // 设置分数
+  const s = exampleScores[index];
+  document.getElementById("s-IAA").innerText  = s.iaa;
+  document.getElementById("s-IQA").innerText  = s.iqa;
+  document.getElementById("s-ISTA").innerText = s.ista;
+
+  // 清零进度条（用于动画）
+  document.getElementById("bar-IAA").style.width  = "0%";
+  document.getElementById("bar-IQA").style.width  = "0%";
+  document.getElementById("bar-ISTA").style.width = "0%";
+
+  // 显示 panel
+  panel.classList.add("show");
+
+  // 延迟执行动画
+  setTimeout(() => {
+    document.getElementById("bar-IAA").style.width  = s.iaa  + "%";
+    document.getElementById("bar-IQA").style.width  = s.iqa  + "%";
+    document.getElementById("bar-ISTA").style.width = s.ista + "%";
+
+    // 打字机显示对应文档
+    typeWriter(textBox, analysisDocs[index], 3500);
+  }, 200);
+
+  // 平滑滚动至分析区域
+  setTimeout(() => {
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 250);
+}
+</script>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="section">
+      <div class="section-title">Contact & Cite</div>
+      <!-- CONTACT & CITE SECTION -->
+<div class="contact-container">
+  
+  <!-- Contact -->
+  <div class="contact-block">
+    <!-- <div class="contact-title">Contact</div> -->
+    <p class="contact-text">
+      For any questions or collaborations, feel free to reach out at
+      <a href="mailto:caoshuo@pjlab.org.cn" class="contact-email">caoshuo@pjlab.org.cn</a>.
+    </p>
+  </div>
+
+  <!-- Citation -->
+  <div class="contact-block">
+    <!-- <div class="contact-title">Cite Our Work</div> -->
+    <p class="contact-text">
+      If you find our work helpful, please consider citing the following:
+    </p>
+
+    <!-- BibTeX Box -->
+    <pre class="bibtex-box">
+@misc{cao2025artimusefinegrainedimageaesthetics,
+  title={ArtiMuse: Fine-Grained Image Aesthetics Assessment with Joint Scoring and Expert-Level Understanding},
+  author={Shuo Cao and Nan Ma and Jiayang Li and Xiaohui Li and Lihao Shao and Kaiwen Zhu and Yu Zhou and Yuandong Pu and Jiarui Wu and Jiaquan Wang and Bo Qu and Wenhai Wang and Yu Qiao and Dajuin Yao and Yihao Liu},
+  year={2025},
+  eprint={2507.14533},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2507.14533}
+}
+    </pre>
+  </div>
+
+</div>
+
+<!-- ====================== STYLE ====================== -->
+<style>
+.contact-container {
+  margin-top: 30px;
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #222;
+}
+
+.contact-block {
+  margin-bottom: 26px;
+}
+
+.contact-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.contact-text {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #333;
+}
+
+.contact-email {
+  color: #0056d6;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-email:hover {
+  text-decoration: underline;
+}
+
+/* BibTeX code box */
+.bibtex-box {
+  background: #f7f7fb;
+  border: 1px solid #dcdce5;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-x: auto;
+  white-space: pre;
+  font-family: "Courier New", monospace;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+}
+</style>
+    </div>
+
+  </div>
+</div>
+
+</section>
+
+</div>
+
+</body>
+</html>
