@@ -9,6 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+  .contribution-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    color: #4A90E2; /* 可以改成你项目的主色调 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
 /* Make the About section follow the same width as other sections */
 .about-wrapper {
   max-width: 1400px;
@@ -502,19 +512,21 @@ body {
   </div> -->
 
   <div class="contribution-item">
-    <div class="contribution-icon">🏛️</div>
+    <div class="contribution-icon">📊</div>
     <div class="contribution-text">
       <span class="contribution-title">UniPercept-Bench.</span>
      <!-- Introduce a perceptual-level MLLM benchmark that spans the IAA, IQA, and ISTA domains and supports both VR and VQA perceptual tasks. -->
-      For the first time, we propose a comprehensive perceptual-level definition system and introduce an MLLM benchmark that spans the IAA, IQA, and ISTA domains while supporting both VR and VQA perceptual tasks.
+      <!-- For the first time, we propose a comprehensive perceptual-level definition system and introduce an MLLM benchmark. Unipercept-Bench spans the Image Aesthetics Assessment (IAA), Image Quality Assessment (IQA), and Image Structure and Texture Assessment (ISTA) domains while supporting both Visual Rating (VR) and Visual Question Answering (VQA) perceptual tasks. -->
+      <!-- We propose <strong>UniPercept-Bench</strong>, the <strong>first comprehensive perceptual-level MLLM benchmark</strong> spanning <strong>Image Aesthetics Assessment (IAA)</strong>, <strong>Image Quality Assessment (IQA)</strong>, and <strong>Image Structure and Texture Assessment (ISTA)</strong> across <strong>Visual Rating (VR)</strong> and <strong>Visual Question Answering (VQA)</strong> tasks. -->
+       We propose UniPercept-Bench, the first comprehensive perceptual-level MLLM benchmark spanning Image Aesthetics Assessment (IAA), Image Quality Assessment (IQA), and Image Structure & Texture Assessment (ISTA) across Visual Rating (VR) and Visual Question Answering (VQA) tasks.
     </div>
   </div>
 
   <div class="contribution-item">
-    <div class="contribution-icon">🧠</div>
+    <div class="contribution-icon">🔬</div>
     <div class="contribution-text">
       <span class="contribution-title">Strong Baseline: UniPercept.</span>
-      Develop a strong baseline MLLM trained via Domain-Adaptive Pre-Training and Task-Aligned RL for perceptual-level image understanding.
+      We develop a strong baseline MLLM trained via Domain-Adaptive Pre-Training and Task-Aligned RL for perceptual-level image understanding.
     </div>
   </div>
 
@@ -530,18 +542,90 @@ body {
     <div class="contribution-icon">🖼️</div>
     <div class="contribution-text">
       <span class="contribution-title">Building Unified Profiles for Every Image.</span>
-      UniPercept constructs a comprehensive profile for each image, spanning the IAA, IQA, and ISTA domains and providing fine-grained, multi-dimensional analytical outputs.
+      UniPercept constructs a comprehensive profile for each image, spanning the IAA, IQA, and ISTA domains and providing fine-grained, multi-dimensional outputs.
     </div>
   </div>
+  
 </div>
 </div>
 
-    <div class="hero-buttons">
-      <a class="hero-btn" href="#"><span class="hero-btn-icon">📄</span> Arxiv</a>
-      <a class="hero-btn" href="#"><span class="hero-btn-icon">💻</span> Code</a>
-      <a class="hero-btn" href="#"><span class="hero-btn-icon">🤗</span> UniPercept</a>
-      <a class="hero-btn" href="#"><span class="hero-btn-icon">📊</span> UniPercept-Bench</a>
-  </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+<style>
+    .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .hero-btn {
+        display: inline-flex;
+        align-items: center;
+        /* 核心修改：确保使用衬线体 (Serif) */
+        font-family: "Lora", "Palatino Linotype", "Book Antiqua", "Palatino", "serif";
+        font-weight: 600;
+        font-size: 16px;
+        
+        background-color: #323642; /* 图片中的按钮背景色 */
+        color: #ffffff !important;
+        padding: 8px 22px;
+        border-radius: 30px; /* 胶囊圆角 */
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .hero-btn:hover {
+        background-color: #414756;
+        transform: translateY(-2px);
+    }
+
+    .hero-btn-icon {
+        margin-right: 8px;
+        font-size: 1.2em;
+        display: flex;
+        align-items: center;
+    }
+
+    /* 调整图标微小偏移，确保与衬线文字视觉对齐 */
+    .hero-btn-icon i {
+        margin-bottom: 1px;
+    }
+</style>
+
+<div class="hero-buttons">
+
+    <a class="hero-btn" href="你的ARXIV链接">
+        <span class="hero-btn-icon"><i class="ai ai-arxiv"></i></span> Arxiv
+    </a>
+
+    <a class="hero-btn" href="https://github.com/thunderbolt215/UniPercept">
+        <span class="hero-btn-icon"><i class="fab fa-github"></i></span> Code
+    </a>
+
+    <a class="hero-btn" href="#">
+        <span class="hero-btn-icon">🤗</span> Checkpoints
+    </a>
+
+    <a class="hero-btn" href="#">
+        <span class="hero-btn-icon">🤗</span> UniPercept-Bench
+    </a>
+
+</div>
+
+    <!-- <div class="hero-buttons">
+
+<a class="hero-btn" href="#"><span class="hero-btn-icon">📄</span> Arxiv</a>
+
+<a class="hero-btn" href="#"><span class="hero-btn-icon">💻</span> Code</a>
+
+<a class="hero-btn" href="#"><span class="hero-btn-icon">🤗</span> Checkpoints</a>
+
+<a class="hero-btn" href="#"><span class="hero-btn-icon">🤗</span> UniPercept-Bench</a>
+
+</div>  -->
 
   <div class="collage-expand-wrapper" id="collage-wrapper">
     <div class="collage-masonry" id="collage-container">
@@ -555,9 +639,9 @@ body {
 <style>
 /* --- ArtiMuse 文本链接风格优化 --- */
 .text-link-item {
-  text-decoration: none !important; /* 强制去除蓝色下划线 */
-  color: #ffffff !important;        /* 强制设为纯白色 */
-  font-size: 14px;
+  text-decoration: none !important;
+  color: #ffffff !important;
+  font-size: 16px; /* 从 14px 调大到 16px */
   font-weight: 500;
   display: inline-flex;
   align-items: center;
@@ -617,8 +701,18 @@ body {
     flex-shrink: 0;
   }
 
-  .contribution-title { color: #fff; font-weight: 700; margin-right: 6px; }
-  .contribution-text { font-size: 14px; color: rgba(255, 255, 255, 0.85); line-height: 1.35; flex: 1; }
+.contribution-title {
+  font-size: 17px; /* 新增这一行 */
+  color: #fff;
+  font-weight: 700;
+  margin-right: 6px;
+}
+  .contribution-text {
+  font-size: 16px; /* 从 14px 调大到 16px */
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5; /* 建议将 1.35 增加到 1.5，防止字体放大后行间距太挤 */
+  flex: 1;
+}
   /* 正文 Text */
   .body-text {
     font-size: 14px;
@@ -655,9 +749,17 @@ body {
   }
 
   .hero-top-section { width: 100%; max-width: 900px; text-align: center; margin-bottom: 10px; }
-  .hero-title { font-size: 40px; font-weight: 900; margin-bottom: 2px; color: #fff; }
-  .hero-subtitle { font-size: 17px; margin-bottom: 12px; color: rgba(255,255,255,0.7); }
-
+  .hero-title {
+  font-size: 48px; /* 从 40px 调大到 48px */
+  font-weight: 900;
+  margin-bottom: 2px;
+  color: #fff;
+}
+.hero-subtitle {
+  font-size: 20px; /* 从 17px 调大到 20px */
+  margin-bottom: 12px;
+  color: rgba(255,255,255,0.7);
+}
   .hero-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
   .hero-btn {
     padding: 6px 16px; 
@@ -716,13 +818,13 @@ body {
 
   .collage-image-box img { width: 100%; height: auto; display: block; }
 
-  .collage-text {
-    padding: 8px 10px;
-    font-size: 10px;
-    line-height: 1.3;
-    color: rgba(255, 255, 255, 0.85);
-    background: rgba(0, 0, 0, 0.2);
-  }
+.collage-text {
+  padding: 8px 10px;
+  font-size: 12px; /* 从 10px 调大到 12px */
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.2);
+}
 
   .collage-overlay {
     position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; 
@@ -741,12 +843,66 @@ body {
   .grad-red { color: #f472b6; text-shadow: 0 0 10px rgba(244,114,182,0.2); }
   .grad-blue { color: #60a5fa; text-shadow: 0 0 10px rgba(96,165,250,0.2); }
   .grad-purple { color: #a78bfa; text-shadow: 0 0 10px rgba(167,139,250,0.2); }
+/* 单元格容器：增加底部内边距以放置标签 */
+  .collage-item {
+    position: relative !important;
+    display: flex;
+    flex-direction: column;
+    background-color: #252932; /* 建议背景色，使其与页面统一 */
+    border-radius: 12px;
+    overflow: hidden;
+    /* 核心修改：底部预留 35px 空间，确保文字不进入标签区域 */
+    padding-bottom: 35px !important; 
+    height: 100%;
+  }
+
+  /* 图片说明文字：确保文字与标签之间有呼吸感 */
+  .collage-text {
+    padding: 12px 15px 5px 15px;
+    font-size: 14px;
+    line-height: 1.4;
+    flex-grow: 1;
+    color: #ececec;
+  }
+
+  /* 胶囊体标签：固定在单元格最右下角 */
+  .category-capsule {
+    position: absolute;
+    bottom: 8px;   /* 距离单元格最底部的距离 */
+    right: 8px;    /* 距离单元格最右侧的距离 */
+    padding: 3px 10px;
+    border-radius: 15px;
+    color: white;
+    font-weight: 700;
+    font-size: 10px;
+    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    pointer-events: none;
+  }
+
+  /* 配色方案 (从提供的图中取色) */
+  .capsule-IAA { background-color: #ff7b89; }
+  .capsule-IQA { background-color: #5c9aff; }
+  .capsule-ISTA { background-color: #a86bff; }
+  .capsule-Unified { 
+    background: linear-gradient(135deg, #ff7b89 0%, #5c9aff 50%, #a86bff 100%); 
+  }
+
+  /* 鼠标悬停单元格微动 */
+  .collage-item:hover {
+    transform: translateY(-3px);
+    transition: transform 0.2s ease;
+  }
 </style>
 
 <script>
   (function () {
     const rowData = {
       IAA: [
+        { img: "figures/teaser/iaa_score_high.jpg", text: "The aesthetic score of this image is 76 / 100 (High)." },
+        { img: "figures/teaser/iaa_score_low.jpg", text: "The aesthetic score of this image is 41 / 100 (Low)." },
         { img: "figures/teaser/iaa_1.png", text: "Q: What structural element guides the viewer's eye? <br> A: Diagonal shoreline line." },
         { img: "figures/teaser/iaa_2.png", text: "Q: Does the glow enhance atmosphere? <br> A: Yes." },
         { img: "figures/teaser/iaa_3.png", text: "Q: Which element conveys cultural insight? <br> A: Samurai armor." },
@@ -754,6 +910,7 @@ body {
         { img: "figures/teaser/reward_iaa_1.png", text: "T2I model w/ UniPercept IAA reward exhibits marked improvements in aesthetic quality." },
         { img: "figures/teaser/iaa_add_1.png", text: "Q: What compositional decision most impacts the sense of grandeur in the image?  <br> A: Emphasizing vertical layers." },
         { img: "figures/teaser/iaa_add_2.png", text: "Q: What is your assessment of the Comprehensive Evaluation quality in this picture?  <br> A: High." }
+        
       ],
       IQA: [
         { img: "figures/teaser/iqa_1.png", text: "Q: What spatial region shows motion blur?<br> A: Basketball in mid-air." },
@@ -762,9 +919,12 @@ body {
         // { img: "figures/teaser/iqa_4.png", text: "T2I model w/ UniPercept IQA reward exhibits marked improvements in quality." },
         { img: "figures/teaser/reward_iqa_1.png", text: "T2I model w/ UniPercept IQA reward exhibits marked improvements in quality." },
         { img: "figures/teaser/iqa_add_1.png", text: "Q: What distortion type is most evident in this image's color representation? <br> A: Saturation Weaken HSV." },
-        { img: "figures/teaser/iqa_add_2.png", text: "Q: How does the spatial clarity differ between the wooden floor and the cat's fur? <br> A: Floor grain is sharper than fur texture." }
+        { img: "figures/teaser/iqa_add_2.png", text: "Q: How does the spatial clarity differ between the wooden floor and the cat's fur? <br> A: Floor grain is sharper than fur texture." },
+        { img: "figures/teaser/iqa_score_high.jpg", text: "The quality score of this image is 73 / 100 (High)." },
+        { img: "figures/teaser/iqa_score_low.jpg", text: "The quality score of this image is 30 / 100 (Low)." }   
       ],
       ISTA: [
+        { img: "figures/teaser/ista_score_high.jpg", text: "The structure & texture richness score of this image is 67 / 100 (High)." },
         { img: "figures/teaser/ista_1.png", text: "Q: How can the fabric pattern be classified?<br> A: Grid of squares." },
         { img: "figures/teaser/ista_2.png", text: "Q: Primary material of spray paint cans?<br> A: Metal." },
         { img: "figures/teaser/ista_3.png", text: "Q: Surface texture implication?<br> A: Sea, smooth, gradient teal." },
@@ -772,6 +932,12 @@ body {
         { img: "figures/teaser/reward_ista_2.png", text: "T2I model w/ UniPercept ISTA reward richness." },
         { img: "figures/teaser/ista_add_1.png", text: "Q: What is the primary 2D contour shape visible in the honeycomb structure?  <br> A: Hexagon." },
         { img: "figures/teaser/ista_add_2.png", text: "Q: What term best describes the surface texture of the sandy scene?  <br> A: Pitted." },
+        { img: "figures/teaser/ista_score_low.jpg", text: "The structure & texture richness score of this image is 17 / 100 (Low)." }
+        // { img: "figures/teaser/reward_all_1.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." },
+        // { img: "figures/teaser/reward_all_2.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." },
+        // { img: "figures/teaser/reward_all_3.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." }
+      ],
+      Unified: [
         { img: "figures/teaser/reward_all_1.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." },
         { img: "figures/teaser/reward_all_2.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." },
         { img: "figures/teaser/reward_all_3.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." }
@@ -781,33 +947,36 @@ body {
     const container = document.getElementById("collage-container");
     const wrapper = document.getElementById("collage-wrapper");
     const btn = document.getElementById("expand-btn");
-    const resBtn = document.getElementById("research-btn");
-    const resBox = document.getElementById("research-box");
-
-    resBtn.addEventListener('click', () => resBox.classList.toggle('is-active'));
 
     let allItems = [];
-    Object.keys(rowData).forEach(task => {
-      rowData[task].forEach(item => allItems.push(item));
+    Object.keys(rowData).forEach(category => {
+      rowData[category].forEach(item => {
+        allItems.push({ ...item, category: category });
+      });
     });
+
     allItems.sort(() => 0.5 - Math.random());
 
+    // 结构修改：标签现在是 collage-item 的直接子元素，位于结构最后
     container.innerHTML = allItems.map(item => `
       <div class="collage-item">
         <div class="collage-image-box">
           <img src="${item.img}" alt="" loading="lazy">
         </div>
         <div class="collage-text">${item.text}</div>
+        <div class="category-capsule capsule-${item.category}">${item.category}</div>
       </div>
     `).join('');
 
-    btn.addEventListener('click', () => {
-      wrapper.classList.toggle('expanded');
-      btn.textContent = wrapper.classList.contains('expanded') ? "Collapse Content" : "Expand to View All";
-      if (!wrapper.classList.contains('expanded')) {
-        window.scrollTo({ top: wrapper.offsetTop - 50, behavior: 'smooth' });
-      }
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        wrapper.classList.toggle('expanded');
+        btn.textContent = wrapper.classList.contains('expanded') ? "Collapse Content" : "Expand to View All";
+        if (!wrapper.classList.contains('expanded')) {
+          window.scrollTo({ top: wrapper.offsetTop - 50, behavior: 'smooth' });
+        }
+      });
+    }
   })();
 </script>
 
@@ -1832,6 +2001,8 @@ and flow </div>
         <div class="tag tag-IQA">Location Description</div>
       </div>
     </div>
+
+    
   </div> 
 
   <!-- ===================== -->
@@ -1905,6 +2076,78 @@ and flow </div>
       </div>
     </div>
 
+  </div>
+
+  <div class="examples-row">
+    <!-- 4 CARDS -->
+    <div class="example-card">
+      <img src="figures/bench_examples/iaa_score_1.jpg" class="example-img" />
+      <div class="example-text" domain="IAA">
+
+  <!-- Q（深色主题色） -->
+  <div class="q-IAA">
+    Q: Rate the aesthetics score of this image as a score out of 100.
+  </div>
+
+  <!-- 选项：A/B/C/D -->
+
+  <!-- C 正确选项（亮色主题色） -->
+  <div class="option-line correct-IAA">The aesthetics score of ths image is 85 / 100.</div>
+
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IAA">IAA</div>
+        <div class="tag tag-IAA">Aesthetics Score</div>
+        <!-- <div class="tag tag-IAA">Hierarchical Emphasis</div> -->
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/iqa_score_1.jpg" class="example-img" />
+      <div class="example-text" domain="IQA">
+  <div class="q-IQA">Provide an overall quality assessment score for this image (0-100). </div>
+  <div class="option-line correct-IQA">The quality score of ths image is 36 / 100.</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IQA">IQA</div>
+        <div class="tag tag-IQA">Quality Score</div>
+        <!-- <div class="tag tag-IQA">Location Description</div> -->
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/ista_score_1.jpg" class="example-img" />
+      <div class="example-text" domain="ISTA">
+  <div class="q-ISTA">Rate the overall structure & texture richness of this image on a scale of 0 to 100. </div>
+  <div class="option-line correct-ISTA">The structure & texture richness score of ths image is 64 / 100.</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-ISTA">ISTA</div>
+        <div class="tag tag-ISTA">Structure & Texture Richness Score</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/iaa_score_2.jpg" class="example-img" />
+      <div class="example-text" domain="IAA">
+
+  <!-- Q（深色主题色） -->
+  <div class="q-IAA">
+    Q: Give an overall aesthetic assessment of this image as a score out of 100.
+  </div>
+
+  <!-- 选项：A/B/C/D -->
+
+  <!-- C 正确选项（亮色主题色） -->
+  <div class="option-line correct-IAA">The aesthetics score of ths image is 51 / 100.</div>
+
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IAA">IAA</div>
+        <div class="tag tag-IAA">Aesthetics Score</div>
+        <!-- <div class="tag tag-IAA">Hierarchical Emphasis</div> -->
+      </div>
+    </div>
   </div>
 
 </div>
@@ -2052,15 +2295,15 @@ and flow </div>
 
   <div class="bench-subtitle">Choose Perceptual Domain</div>
   <div class="domain-selector">
-    <div class="domain-btn domain-IAA" data-domain="IAA">IAA</div>
-    <div class="domain-btn domain-IQA" data-domain="IQA">IQA</div>
-    <div class="domain-btn domain-ISTA" data-domain="ISTA">ISTA</div>
+    <div class="domain-btn domain-IAA" data-domain="IAA">Aesthetics (IAA)</div>
+    <div class="domain-btn domain-IQA" data-domain="IQA">Quality (IQA)</div>
+    <div class="domain-btn domain-ISTA" data-domain="ISTA">Structure & Texture (ISTA)</div>
   </div>
 
   <div class="bench-subtitle">Choose Task</div>
   <div class="task-selector">
-    <div class="task-btn" data-task="VR">VR</div>
-    <div class="task-btn" data-task="VQA">VQA</div>
+    <div class="task-btn" data-task="VR">Visual Rating (VR)</div>
+    <div class="task-btn" data-task="VQA">Visual Question Answering (VQA)</div>
   </div>
 
 
@@ -3949,7 +4192,7 @@ updateChart();
 
     <!-- RESULTS -->
     <div id="results" class="section">
-      <div class="section-title">Unified Results</div>
+      <div class="section-title">Building Unified Profiles for Every Image</div>
 
       <style>
   /* --- 您提供的基础样式 (保持不变) --- */
@@ -4487,14 +4730,14 @@ const analysisDocs = [
     [Base Morphology: Tiled] [Arrangement: Layered]  
     [Material Class: Tile] [Surface Properties: Matte]  
     [Planar Contour: Rectangle]  
-    [Semantic Perception: Style Type: Traditional]
+    [Style Type: Traditional]
   </li>
   <li>
     Componet: Chimneys —  
     [Base Morphology: Brick] [Arrangement: Vertical]  
     [Material Class: Brick] [Surface Properties: Matte]  
     [Planar Contour: Rectangle] [Volumetric Form: Cuboid]  
-    [Semantic Perception: Style Type: Traditional]
+    [Style Type: Traditional]
   </li>
   <li>...</li>
 </ul>`,
