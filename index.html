@@ -486,7 +486,7 @@ body {
     <div class="research-content-box" id="research-box">
       <div class="research-links-inner">
         <a class="text-link-item" href="https://thunderbolt215.github.io/ArtiMuse-project/" target="_blank">
-          <span class="link-icon">🎨</span> ArtiMuse
+          <span class="link-icon">🎨</span> ArtiMuse: Fine-Grained Image Aesthetics Assessment with Joint Scoring and Expert-Level Understanding
         </a>
       </div>
     </div>
@@ -899,6 +899,7 @@ body {
 
 <script>
   (function () {
+    // --- 1. 数据定义 (保持不变) ---
     const rowData = {
       IAA: [
         { img: "figures/teaser/iaa_score_high.jpg", text: "The aesthetic score of this image is 76 / 100 (High)." },
@@ -906,17 +907,14 @@ body {
         { img: "figures/teaser/iaa_1.png", text: "Q: What structural element guides the viewer's eye? <br> A: Diagonal shoreline line." },
         { img: "figures/teaser/iaa_2.png", text: "Q: Does the glow enhance atmosphere? <br> A: Yes." },
         { img: "figures/teaser/iaa_3.png", text: "Q: Which element conveys cultural insight? <br> A: Samurai armor." },
-        // { img: "figures/teaser/iaa_4.png", text: "T2I model w/ UniPercept IAA reward exhibits marked improvements in aesthetic quality." },
         { img: "figures/teaser/reward_iaa_1.png", text: "T2I model w/ UniPercept IAA reward exhibits marked improvements in aesthetic quality." },
         { img: "figures/teaser/iaa_add_1.png", text: "Q: What compositional decision most impacts the sense of grandeur in the image?  <br> A: Emphasizing vertical layers." },
         { img: "figures/teaser/iaa_add_2.png", text: "Q: What is your assessment of the Comprehensive Evaluation quality in this picture?  <br> A: High." }
-        
       ],
       IQA: [
         { img: "figures/teaser/iqa_1.png", text: "Q: What spatial region shows motion blur?<br> A: Basketball in mid-air." },
         { img: "figures/teaser/iqa_2.png", text: "Q: To what degree are distortions present?<br> A: Obvious." },
         { img: "figures/teaser/iqa_3.png", text: "Q: How does pixelation affect texture?<br> A: Blocky appearance." },
-        // { img: "figures/teaser/iqa_4.png", text: "T2I model w/ UniPercept IQA reward exhibits marked improvements in quality." },
         { img: "figures/teaser/reward_iqa_1.png", text: "T2I model w/ UniPercept IQA reward exhibits marked improvements in quality." },
         { img: "figures/teaser/iqa_add_1.png", text: "Q: What distortion type is most evident in this image's color representation? <br> A: Saturation Weaken HSV." },
         { img: "figures/teaser/iqa_add_2.png", text: "Q: How does the spatial clarity differ between the wooden floor and the cat's fur? <br> A: Floor grain is sharper than fur texture." },
@@ -933,9 +931,6 @@ body {
         { img: "figures/teaser/ista_add_1.png", text: "Q: What is the primary 2D contour shape visible in the honeycomb structure?  <br> A: Hexagon." },
         { img: "figures/teaser/ista_add_2.png", text: "Q: What term best describes the surface texture of the sandy scene?  <br> A: Pitted." },
         { img: "figures/teaser/ista_score_low.jpg", text: "The structure & texture richness score of this image is 17 / 100 (Low)." }
-        // { img: "figures/teaser/reward_all_1.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." },
-        // { img: "figures/teaser/reward_all_2.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." },
-        // { img: "figures/teaser/reward_all_3.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." }
       ],
       Unified: [
         { img: "figures/teaser/reward_all_1.png", text: "UniPercept All reward significantly boosts T2I performance across all perceptual levels." },
@@ -944,10 +939,16 @@ body {
       ]
     };
 
+    // --- 2. 元素初始化 ---
     const container = document.getElementById("collage-container");
     const wrapper = document.getElementById("collage-wrapper");
-    const btn = document.getElementById("expand-btn");
+    const expandBtn = document.getElementById("expand-btn");
+    
+    // 获取 More Research 相关的元素
+    const researchBtn = document.getElementById("research-btn");
+    const researchBox = document.getElementById("research-box");
 
+    // --- 3. 渲染拼接图内容 ---
     let allItems = [];
     Object.keys(rowData).forEach(category => {
       rowData[category].forEach(item => {
@@ -957,22 +958,41 @@ body {
 
     allItems.sort(() => 0.5 - Math.random());
 
-    // 结构修改：标签现在是 collage-item 的直接子元素，位于结构最后
-    container.innerHTML = allItems.map(item => `
-      <div class="collage-item">
-        <div class="collage-image-box">
-          <img src="${item.img}" alt="" loading="lazy">
+    if (container) {
+      container.innerHTML = allItems.map(item => `
+        <div class="collage-item">
+          <div class="collage-image-box">
+            <img src="${item.img}" alt="" loading="lazy">
+          </div>
+          <div class="collage-text">${item.text}</div>
+          <div class="category-capsule capsule-${item.category}">${item.category}</div>
         </div>
-        <div class="collage-text">${item.text}</div>
-        <div class="category-capsule capsule-${item.category}">${item.category}</div>
-      </div>
-    `).join('');
+      `).join('');
+    }
 
-    if (btn) {
-      btn.addEventListener('click', () => {
-        wrapper.classList.toggle('expanded');
-        btn.textContent = wrapper.classList.contains('expanded') ? "Collapse Content" : "Expand to View All";
-        if (!wrapper.classList.contains('expanded')) {
+    // --- 4. 逻辑：More Research 展开/收起 ---
+    if (researchBtn && researchBox) {
+      researchBtn.addEventListener('click', () => {
+        // 切换 active 类名触发 CSS transition
+        const isActive = researchBox.classList.toggle('is-active');
+        
+        // 可选：旋转箭头图标 (▾ -> ▴)
+        const arrow = researchBtn.querySelector('.toggle-arrow');
+        if (arrow) {
+          arrow.style.display = 'inline-block';
+          arrow.style.transition = 'transform 0.3s ease';
+          arrow.style.transform = isActive ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+      });
+    }
+
+    // --- 5. 逻辑：拼接图 Expand/Collapse ---
+    if (expandBtn && wrapper) {
+      expandBtn.addEventListener('click', () => {
+        const isExpanded = wrapper.classList.toggle('expanded');
+        expandBtn.textContent = isExpanded ? "Collapse Content" : "Expand to View All";
+        
+        if (!isExpanded) {
           window.scrollTo({ top: wrapper.offsetTop - 50, behavior: 'smooth' });
         }
       });
@@ -2079,34 +2099,108 @@ and flow </div>
   </div>
 
   <div class="examples-row">
-    <!-- 4 CARDS -->
-    <div class="example-card">
-      <img src="figures/bench_examples/iaa_score_1.jpg" class="example-img" />
-      <div class="example-text" domain="IAA">
+      <!-- 4 CARDS -->
+      <div class="example-card">
+        <img src="figures/bench_examples/iaa_score_1.jpg" class="example-img" />
+        <div class="example-text" domain="IAA">
 
-  <!-- Q（深色主题色） -->
-  <div class="q-IAA">
-    Q: Rate the aesthetics score of this image as a score out of 100.
-  </div>
-
-  <!-- 选项：A/B/C/D -->
-
-  <!-- C 正确选项（亮色主题色） -->
-  <div class="option-line correct-IAA">The aesthetics score of ths image is 85 / 100.</div>
-
-</div>
-      <div class="example-tags">
-        <div class="tag tag-IAA">IAA</div>
-        <div class="tag tag-IAA">Aesthetics Score</div>
-        <!-- <div class="tag tag-IAA">Hierarchical Emphasis</div> -->
-      </div>
+    <!-- Q（深色主题色） -->
+    <div class="q-IAA">
+      Q: Rate the aesthetics score of this image as a score out of 100.
     </div>
 
+    <!-- 选项：A/B/C/D -->
+
+    <!-- C 正确选项（亮色主题色） -->
+    <div class="option-line correct-IAA">Aesthetics score : 85.</div>
+
+  </div>
+        <div class="example-tags">
+          <div class="tag tag-IAA">IAA</div>
+          <div class="tag tag-IAA">Aesthetics Score</div>
+          <!-- <div class="tag tag-IAA">Hierarchical Emphasis</div> -->
+        </div>
+      </div>
+
+      <div class="example-card">
+        <img src="figures/bench_examples/iaa_60.jpg" class="example-img" />
+        <div class="example-text" domain="IAA">
+
+    <!-- Q（深色主题色） -->
+    <div class="q-IAA">
+      Please provide a quantitative aesthetic assessment for this image on a scale from 0 to 100.
+    </div>
+
+    <!-- 选项：A/B/C/D -->
+
+    <!-- C 正确选项（亮色主题色） -->
+    <div class="option-line correct-IAA">Aesthetics score : 60.</div>
+
+  </div>
+        <div class="example-tags">
+          <div class="tag tag-IAA">IAA</div>
+          <div class="tag tag-IAA">Aesthetics Score</div>
+          <!-- <div class="tag tag-IAA">Hierarchical Emphasis</div> -->
+        </div>
+      </div>
+
+      <div class="example-card">
+        <img src="figures/bench_examples/iaa_57.jpg" class="example-img" />
+        <div class="example-text" domain="IAA">
+
+    <!-- Q（深色主题色） -->
+    <div class="q-IAA">
+      Q: Evaluate the aesthetics of this image with a score out of 100.
+    </div>
+
+    <!-- 选项：A/B/C/D -->
+
+    <!-- C 正确选项（亮色主题色） -->
+    <div class="option-line correct-IAA">Aesthetics score : 57.</div>
+
+  </div>
+        <div class="example-tags">
+          <div class="tag tag-IAA">IAA</div>
+          <div class="tag tag-IAA">Aesthetics Score</div>
+          <!-- <div class="tag tag-IAA">Hierarchical Emphasis</div> -->
+        </div>
+      </div>
+
+      <div class="example-card">
+        <img src="figures/bench_examples/iaa_34.jpg" class="example-img" />
+        <div class="example-text" domain="IAA">
+
+    <!-- Q（深色主题色） -->
+    <div class="q-IAA">
+      Q: Assign an aesthetics score out of 100 to this image.
+    </div>
+
+    <!-- 选项：A/B/C/D -->
+
+    <!-- C 正确选项（亮色主题色） -->
+    <div class="option-line correct-IAA">Aesthetics score : 34.</div>
+
+  </div>
+        <div class="example-tags">
+          <div class="tag tag-IAA">IAA</div>
+          <div class="tag tag-IAA">Aesthetics Score</div>
+          <!-- <div class="tag tag-IAA">Hierarchical Emphasis</div> -->
+        </div>
+      </div>
+  </div>
+
+
+
+  <!-- ===================== -->
+  <!-- IQA Row (Row 2)       -->
+  <!-- ===================== -->
+  <div class="examples-row">
+    <!-- 4 CARDS -->
     <div class="example-card">
-      <img src="figures/bench_examples/iqa_score_1.jpg" class="example-img" />
+      <img src="figures/bench_examples/iqa_73.jpg" class="example-img" />
       <div class="example-text" domain="IQA">
   <div class="q-IQA">Provide an overall quality assessment score for this image (0-100). </div>
-  <div class="option-line correct-IQA">The quality score of ths image is 36 / 100.</div>
+  <div class="option-line correct-IQA">Quality score : 73.</div>
 </div>
       <div class="example-tags">
         <div class="tag tag-IQA">IQA</div>
@@ -2116,10 +2210,56 @@ and flow </div>
     </div>
 
     <div class="example-card">
-      <img src="figures/bench_examples/ista_score_1.jpg" class="example-img" />
+      <img src="figures/bench_examples/iqa_71.jpg" class="example-img" />
+      <div class="example-text" domain="IQA">
+  <div class="q-IQA">Assign an overall quality assessment score to this image (0-100). </div>
+  <div class="option-line correct-IQA">Quality score : 71.</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IQA">IQA</div>
+        <div class="tag tag-IQA">Quality Score</div>
+        <!-- <div class="tag tag-IQA">Location Description</div> -->
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/iqa_59.jpg" class="example-img" />
+      <div class="example-text" domain="IQA">
+  <div class="q-IQA">Give an overall quality assessment score for this image on a scale of 0-100. </div>
+  <div class="option-line correct-IQA">Quality score : 59.</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IQA">IQA</div>
+        <div class="tag tag-IQA">Quality Score</div>
+        <!-- <div class="tag tag-IQA">Location Description</div> -->
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/iqa_score_1.jpg" class="example-img" />
+      <div class="example-text" domain="IQA">
+  <div class="q-IQA">Rate this image with an overall quality assessment score from 0 to 100. </div>
+  <div class="option-line correct-IQA">Quality score : 36.</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-IQA">IQA</div>
+        <div class="tag tag-IQA">Quality Score</div>
+        <!-- <div class="tag tag-IQA">Location Description</div> -->
+      </div>
+    </div>
+    
+  </div> 
+
+  <!-- ===================== -->
+  <!-- ISTA Row (Row 3)      -->
+  <!-- ===================== -->
+  <div class="examples-row">
+    <!-- 4 CARDS -->
+    <div class="example-card">
+      <img src="figures/bench_examples/ista_89.jpg" class="example-img" />
       <div class="example-text" domain="ISTA">
   <div class="q-ISTA">Rate the overall structure & texture richness of this image on a scale of 0 to 100. </div>
-  <div class="option-line correct-ISTA">The structure & texture richness score of ths image is 64 / 100.</div>
+  <div class="option-line correct-ISTA">Structure & texture richness score : 89.</div>
 </div>
       <div class="example-tags">
         <div class="tag tag-ISTA">ISTA</div>
@@ -2128,27 +2268,43 @@ and flow </div>
     </div>
 
     <div class="example-card">
-      <img src="figures/bench_examples/iaa_score_2.jpg" class="example-img" />
-      <div class="example-text" domain="IAA">
-
-  <!-- Q（深色主题色） -->
-  <div class="q-IAA">
-    Q: Give an overall aesthetic assessment of this image as a score out of 100.
-  </div>
-
-  <!-- 选项：A/B/C/D -->
-
-  <!-- C 正确选项（亮色主题色） -->
-  <div class="option-line correct-IAA">The aesthetics score of ths image is 51 / 100.</div>
-
+      <img src="figures/bench_examples/ista_68.jpg" class="example-img" />
+      <div class="example-text" domain="ISTA">
+  <div class="q-ISTA">Assign an overall structure & texture richness score to this image (0-100). </div>
+  <div class="option-line correct-ISTA">Structure & texture richness score : 68.</div>
 </div>
       <div class="example-tags">
-        <div class="tag tag-IAA">IAA</div>
-        <div class="tag tag-IAA">Aesthetics Score</div>
-        <!-- <div class="tag tag-IAA">Hierarchical Emphasis</div> -->
+        <div class="tag tag-ISTA">ISTA</div>
+        <div class="tag tag-ISTA">Structure & Texture Richness Score</div>
       </div>
     </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/ista_37.jpg" class="example-img" />
+      <div class="example-text" domain="ISTA">
+  <div class="q-ISTA">Provide an overall structure & texture richness score for this image on a scale of 0-100. </div>
+  <div class="option-line correct-ISTA">Structure & texture richness score : 37.</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-ISTA">ISTA</div>
+        <div class="tag tag-ISTA">Structure & Texture Richness Score</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <img src="figures/bench_examples/ista_11.jpg" class="example-img" />
+      <div class="example-text" domain="ISTA">
+  <div class="q-ISTA">Give an overall structure & texture richness score for this image from 0 to 100. </div>
+  <div class="option-line correct-ISTA">Structure & texture richness score : 11.</div>
+</div>
+      <div class="example-tags">
+        <div class="tag tag-ISTA">ISTA</div>
+        <div class="tag tag-ISTA">Structure & Texture Richness Score</div>
+      </div>
+    </div>
+
   </div>
+
 
 </div>
 
@@ -2310,6 +2466,7 @@ and flow </div>
 </div>
 <!-- Leaderboard 样式（与你现有风格一致） -->
 <style>
+
 .leaderboard-title {
   font-size: 22px;
   font-weight: 700;
@@ -2367,7 +2524,7 @@ and flow </div>
 </style>
 
 <!-- 6 TABLE PLACEHOLDERS -->
-<div class="table-content" id="IAA-VR">
+<!-- <div class="table-content" id="IAA-VR">
     <div class="leaderboard-wrapper">
   <table class="leaderboard-table">
 
@@ -2385,35 +2542,35 @@ and flow </div>
 <tbody>
 <tr class="rank1">
 <td>🥇 UniPercept (Ours)</td>
-<td><span class="bluecell100">0.746/0.738</span></td>
-<td><span class="bluecell100">0.589/0.577</span></td>
-<td><span class="bluecell100">0.336/0.346</span></td>
-<td><span class="bluecell100">0.688/0.681</span></td>
-<td><b><span class="bluecell100">0.590/0.586</span></b></td>
+<td>0.746/0.738</td>
+<td>0.589/0.577</td>
+<td>0.336/0.346</td>
+<td>0.688/0.681</td>
+<td>0.590/0.586</td>
 </tr>
 <tr class="rank2">
 <td>🥈 GPT-4o</td>
 <td>0.333/0.276</td>
-<td><span class="bluecell70">0.509/0.485</span></td>
+<td>0.509/0.485</td>
 <td>0.278/0.282</td>
 <td>0.605/0.597</td>
-<td><span class="bluecell70">0.431/0.410</span></td>
+<td>0.431/0.410</td>
 </tr>
 <tr class="rank3">
 <td>🥉 GLM-4.5-V-106B</td>
 <td>0.346/0.249</td>
 <td>0.464/0.420</td>
-<td><span class="bluecell70">0.289/0.278</span></td>
-<td><span class="bluecell70">0.651/0.597</span></td>
+<td>0.289/0.278</td>
+<td>0.651/0.597</td>
 <td>0.438/0.386</td>
 </tr>
 <tr>
 <td>ArtiMuse</td>
-<td><span class="bluecell70">0.614/0.627</span></td>
+<td>0.614/0.627</td>
 <td>0.397/0.385</td>
 <td>0.230/0.232</td>
 <td>0.349/0.334</td>
-<td><b>0.398/0.395</b></td>
+<td>0.398/0.395</td>
 </tr>
 <tr>
 <td>QwenVL-2.5-72B</td>
@@ -2421,7 +2578,180 @@ and flow </div>
 <td>0.408/0.387</td>
 <td>0.232/0.235</td>
 <td>0.626/0.589</td>
-<td><b>0.375/0.352</b></td>
+<td>0.375/0.352</td>
+</tr>
+<tr>
+<td>LLaVA-OneVision-1.5-8B</td>
+<td>0.274/0.212</td>
+<td>0.381/0.378</td>
+<td>0.213/0.224</td>
+<td>0.586/0.541</td>
+<td>0.364/0.339</td>
+</tr>
+<tr>
+<td>Q-Insight*</td>
+<td>0.228/0.175</td>
+<td>0.405/0.376</td>
+<td>0.212/0.217</td>
+<td>0.617/0.537</td>
+<td>0.366/0.326</td>
+</tr>
+<tr>
+<td>InternVL3.5-38B</td>
+<td>0.219/0.175</td>
+<td>0.359/0.357</td>
+<td>0.201/0.208</td>
+<td>0.559/0.529</td>
+<td>0.334/0.317</td>
+</tr>
+<tr>
+<td>InternVL3-8B</td>
+<td>0.245/0.211</td>
+<td>0.372/0.344</td>
+<td>0.205/0.191</td>
+<td>0.547/0.476</td>
+<td>0.342/0.306</td>
+</tr>
+<tr>
+<td>QwenVL-2.5-7B</td>
+<td>0.223/0.143</td>
+<td>0.359/0.324</td>
+<td>0.208/0.195</td>
+<td>0.588/0.520</td>
+<td>0.345/0.296</td>
+</tr>
+<tr>
+<td>Q-Align*</td>
+<td>0.551/0.573</td>
+<td>0.398/0.386</td>
+<td>0.194/0.197</td>
+<td>0.137/0.123</td>
+<td>0.320/0.320</td>
+</tr>
+<tr>
+<td>InternVL3-78B</td>
+<td>0.223/0.206</td>
+<td>0.385/0.344</td>
+<td>0.221/0.220</td>
+<td>0.518/0.433</td>
+<td>0.337/0.301</td>
+</tr>
+<tr>
+<td>Llama-4-Scout</td>
+<td>0.204/0.147</td>
+<td>0.345/0.329</td>
+<td>0.236/0.210</td>
+<td>0.548/0.506</td>
+<td>0.333/0.298</td>
+</tr>
+<tr>
+<td>QwenVL-3-32B</td>
+<td>0.227/0.130</td>
+<td>0.353/0.198</td>
+<td>0.200/0.095</td>
+<td>0.572/0.413</td>
+<td>0.338/0.209</td>
+</tr>
+<tr>
+<td>InternVL3.5-8B</td>
+<td>0.135/0.104</td>
+<td>0.308/0.295</td>
+<td>0.180/0.182</td>
+<td>0.519/0.448</td>
+<td>0.286/0.257</td>
+</tr>
+<tr>
+<td>QwenVL-3-8B</td>
+<td>0.156/0.094</td>
+<td>0.280/0.170</td>
+<td>0.191/0.121</td>
+<td>0.507/0.388</td>
+<td>0.283/0.193</td>
+</tr>
+<tr>
+<td>Gemini-2.5-pro</td>
+<td>0.187/0.035</td>
+<td>0.248/0.100</td>
+<td>0.143/0.037</td>
+<td>0.357/0.206</td>
+<td>0.234/0.095</td>
+</tr>
+<tr>
+<td>Claude-Sonnet-4.5-Think</td>
+<td>0.066/0.103</td>
+<td>0.018/0.019</td>
+<td>0.026/0.039</td>
+<td>-/-</td>
+<td>0.037/0.054</td>
+</tr>
+<tr>
+<td>Claude-Sonnet-4.5</td>
+<td>0.041/0.027</td>
+<td>0.003/0.013</td>
+<td>0.040/0.047</td>
+<td>0.037/0.049</td>
+<td>0.030/0.034</td>
+</tr>
+</tbody>
+
+  </table>
+</div>
+</div> -->
+
+<div class="table-content" id="IAA-VR">
+    <div class="leaderboard-wrapper">
+  <table class="leaderboard-table">
+    <thead>
+<tr>
+  <th>Models</th>
+  <th>ArtiMuse-10K</th>
+  <th>AVA</th>
+  <th>TAD66K</th>
+  <th>FLICKR-AES</th>
+  <th>Avg</th>
+</tr>
+</thead>
+
+<tbody>
+<tr class="rank1">
+<td>🥇 UniPercept (Ours)</td>
+<td>0.746/0.738</td>
+<td>0.589/0.577</td>
+<td>0.336/0.346</td>
+<td>0.688/0.681</td>
+<td>0.590/0.586</td>
+</tr>
+<tr class="rank2">
+<td>🥈 GPT-4o</td>
+<td>0.333/0.276</td>
+<td>0.509/0.485</td>
+<td>0.278/0.282</td>
+<td>0.605/0.597</td>
+<td>0.431/0.410</td>
+</tr>
+<tr class="rank3">
+<td>🥉 GLM-4.5-V-106B</td>
+<td>0.346/0.249</td>
+<td>0.464/0.420</td>
+<td>0.289/0.278</td>
+<td>0.651/0.597</td>
+<td>0.438/0.386</td>
+</tr>
+<tr>
+<td>ArtiMuse</td>
+<td>0.614/0.627</td>
+<td>0.397/0.385</td>
+<td>0.230/0.232</td>
+<td>0.349/0.334</td>
+<td>0.398/0.395</td>
+</tr>
+<tr>
+<td>QwenVL-2.5-72B</td>
+<td>0.233/0.197</td>
+<td>0.408/0.387</td>
+<td>0.232/0.235</td>
+<td>0.626/0.589</td>
+<td>0.375/0.352</td>
 </tr>
 <tr>
 <td>LLaVA-OneVision-1.5-8B</td>
@@ -2558,27 +2888,27 @@ and flow </div>
 <tbody>
 <tr class="rank1">
 <td>🥇 UniPercept (Ours)</td>
-<td><span class="bluecell70">0.940/0.949</span></td>
-<td><span class="bluecell70">0.904/0.895</span></td>
-<td><span class="bluecell100">0.872/0.870</span></td>
-<td><span class="bluecell100">0.581/0.594</span></td>
-<td><b><span class="bluecell100">0.824/0.827</span></b></td>
+<td>0.940/0.949</td>
+<td>0.904/0.895</td>
+<td>0.872/0.870</td>
+<td>0.581/0.594</td>
+<td>0.824/0.827</td>
 </tr>
 <tr class="rank2">
 <td>🥈 Q-Insight</td>
 <td>0.933/0.916</td>
-<td><span class="bluecell100">0.907/0.905</span></td>
-<td><span class="bluecell70">0.742/0.736</span></td>
-<td><span class="bluecell70">0.486/0.474</span></td>
-<td><b><span class="bluecell70">0.767/0.758</span></b></td>
+<td>0.907/0.905</td>
+<td>0.742/0.736</td>
+<td>0.486/0.474</td>
+<td>0.767/0.758</td>
 </tr>
 <tr class="rank3">
 <td>🥉 DeQA</td>
-<td><span class="bluecell100">0.953/0.941</span></td>
+<td>0.953/0.941</td>
 <td>0.895/0.896</td>
 <td>0.694/0.687</td>
 <td>0.472/0.478</td>
-<td><b>0.753/0.750</b></td>
+<td>0.753/0.750</td>
 </tr>
 <tr>
 <td>Q-Align*</td>
@@ -2736,11 +3066,11 @@ and flow </div>
 <tbody>
 <tr class="rank1">
 <td>🥇 UniPercept (Ours)</td>
-<td><span class="bluecell100">0.778/0.767</span></td>
+<td>0.778/0.767</td>
 </tr>
 <tr class="rank2">
 <td>🥈 InternVL3.5-38B</td>
-<td><span class="bluecell70">0.262/0.345</span></td>
+<td>0.262/0.345</td>
 </tr>
 <tr class="rank3">
 <td>🥉 QwenVL-2.5-72B</td>
@@ -2860,28 +3190,28 @@ and flow </div>
 
     <tbody>
 <tr class="rank1">
-  <td>🥇 <b>UniPercept (Ours)</b></td>
+  <td>🥇 UniPercept (Ours)</td>
   <td>89.74%</td><td>85.71%</td><td>82.44%</td><td>93.94%</td><td>78.51%</td>
   <td>82.69%</td><td>89.24%</td><td>78.54%</td><td>83.12%</td><td>85.51%</td>
-  <td><b>84.23%</b></td>
+  <td>84.23%</td>
 </tr>
 <tr class="rank2">
-  <td>🥈 <b>LLaVA-OneVision-1.5-8B</b></td>
+  <td>🥈 LLaVA-OneVision-1.5-8B</td>
   <td>78.63%</td><td>85.16%</td><td>82.44%</td><td>72.73%</td><td>80.17%</td>
   <td>83.33%</td><td>81.40%</td><td>75.30%</td><td>84.42%</td><td>88.41%</td>
   <td>81.13%</td>
 </tr>
 <tr class="rank3">
-  <td>🥉 <b>InternVL3-78B</b></td>
+  <td>🥉 InternVL3-78B</td>
   <td>79.06%</td><td>85.16%</td><td>77.42%</td><td>69.70%</td><td>78.51%</td>
   <td>81.41%</td><td>79.65%</td><td>73.68%</td><td>84.42%</td><td>81.16%</td>
-  <td><b>79.28%</b></td>
+  <td>79.28%</td>
 </tr>
 <tr>
   <td>Gemini-2.5-pro</td>
   <td>76.50%</td><td>82.42%</td><td>77.06%</td><td>66.67%</td><td>77.69%</td>
   <td>78.21%</td><td>78.20%</td><td>75.71%</td><td>82.47%</td><td>71.01%</td>
-  <td><b>77.73%</b></td>
+  <td>77.73%</td>
 </tr>
 <tr>
   <td>Claude-Sonnet-4.5</td>
@@ -2996,25 +3326,25 @@ and flow </div>
       <!-- ========================= -->
 <tbody>
 <tr class="rank1">
-        <td>🥇 <b>UniPercept (Ours)</b></td>
+        <td>🥇 UniPercept (Ours)</td>
         <td>80.00%</td><td>77.54%</td><td>69.70%</td><td>80.56%</td>
         <td>79.26%</td><td>80.95%</td><td>67.53%</td><td>69.77%</td>
         <td>63.71%</td><td>92.20%</td><td>81.88%</td><td>75.32%</td><td>86.67%</td><td>84.62%</td>
-        <td><b>76.55%</b></td>
+        <td>76.55%</td>
       </tr>
 <tr class="rank2">
-        <td>🥈 <b>InternVL3-78B</b></td>
+        <td>🥈 InternVL3-78B</td>
         <td>71.79%</td><td>73.26%</td><td>61.21%</td><td>73.15%</td>
         <td>74.81%</td><td>74.29%</td><td>53.25%</td><td>37.21%</td>
         <td>45.14%</td><td>85.82%</td><td>81.16%</td><td>72.15%</td><td>86.00%</td><td>75.64%</td>
-        <td><b>68.28%</b></td>
+        <td>68.28%</td>
       </tr>
 <tr class="rank3">
-        <td>🥉 <b>Gemini-2.5-pro</b></td>
+        <td>🥉 Gemini-2.5-pro</td>
         <td>71.79%</td><td>68.45%</td><td>61.59%</td><td>76.85%</td>
         <td>67.41%</td><td>63.81%</td><td>61.84%</td><td>37.21%</td>
         <td>45.98%</td><td>78.72%</td><td>73.91%</td><td>67.72%</td><td>84.67%</td><td>84.62%</td>
-        <td><b>66.44%</b></td>
+        <td>66.44%</td>
       </tr>
 <tr>
         <td>ArtiMuse</td>
@@ -3127,22 +3457,22 @@ and flow </div>
 
  <tbody>
 <tr class="rank1">
-  <td>🥇 <b>UniPercept (Ours)</b></td>
+  <td>🥇 UniPercept (Ours)</td>
   <td>77.43%</td><td>79.60%</td><td>90.98%</td>
   <td>79.60%</td><td>87.03%</td><td>80.86%</td><td>75.60%</td><td>83.42%</td><td>79.31%</td>
-  <td><b>81.07%</b></td>
+  <td>81.07%</td>
 </tr>
 <tr class="rank2">
-  <td>🥈 <b>LLaVA-OneVision-1.5-Instruct-8B</b></td>
+  <td>🥈 LLaVA-OneVision-1.5-Instruct-8B</td>
   <td>76.51%</td><td>59.87%</td><td>77.46%</td>
   <td>59.87%</td><td>91.35%</td><td>70.37%</td><td>61.31%</td><td>82.35%</td><td>75.86%</td>
-  <td><b>72.15%</b></td>
+  <td>72.15%</td>
 </tr>
 <tr class="rank3">
-  <td>🥉 <b>InternVL3-78B</b></td>
+  <td>🥉 InternVL3-78B</td>
   <td>75.41%</td><td>51.84%</td><td>81.56%</td>
   <td>51.84%</td><td>93.51%</td><td>66.67%</td><td>63.10%</td><td>88.24%</td><td>66.67%</td>
-  <td><b>70.31%</b></td>
+  <td>70.31%</td>
 </tr>
 <tr>
   <td>GPT-4o</td>
@@ -3605,8 +3935,6 @@ th.unipercept-subheader {
 
   </tbody>
 </table>
-</div>
-
 
 <script>
 function highlightTable() {
@@ -3637,6 +3965,10 @@ function highlightTable() {
 
 highlightTable();
 </script>
+</div>
+
+
+
 
   </div>
 </div>
